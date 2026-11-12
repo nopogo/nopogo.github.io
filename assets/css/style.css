@@ -120,13 +120,18 @@ p { margin: 0 0 1em; }
 .vision-ring.r2 { width: 72%; height: 72%; animation-delay: -.6s; border-color: rgba(104,200,242,.5); }
 .vision-ring.r3 { width: 44%; height: 44%; animation-delay: -1.2s; border-color: rgba(104,200,242,.75); background: radial-gradient(circle, rgba(104,200,242,.18), transparent 70%); }
 @keyframes breathe { 0%,100% { transform: scale(.82); opacity: .7; } 50% { transform: scale(1); opacity: 1; } }
-.pulse { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); width: 100%; height: 30%; overflow: visible; }
-.pulse-line {
-  fill: none; stroke: var(--sky); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
-  stroke-dasharray: 900; stroke-dashoffset: 900; animation: trace 3.2s linear infinite;
-  filter: drop-shadow(0 0 6px rgba(104,200,242,.8));
+/* keeps the 400x120 viewBox proportions so strokes aren't distorted */
+.pulse {
+  position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+  width: 100%; height: auto; aspect-ratio: 10 / 3; overflow: visible;
+  filter: drop-shadow(0 0 5px rgba(104,200,242,.7));
 }
-@keyframes trace { to { stroke-dashoffset: 0; } }
+.pulse-line {
+  fill: none; stroke: url(#pulse-fade); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
+  /* pathLength=100: draw in from the left, then erase from the left; invisible at both ends so the loop is seamless */
+  stroke-dasharray: 100 100; stroke-dashoffset: 100; animation: trace 3.6s linear infinite;
+}
+@keyframes trace { to { stroke-dashoffset: -100; } }
 .hrv-chip {
   position: absolute; right: 4%; bottom: 10%; display: flex; align-items: center;
   background: rgba(2,22,49,.75); border: 1px solid rgba(104,200,242,.4); color: #dcecfa;

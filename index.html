@@ -59,8 +59,16 @@
           <div class="vision-ring r1"></div>
           <div class="vision-ring r2"></div>
           <div class="vision-ring r3"></div>
-          <svg class="pulse" viewBox="0 0 400 120" preserveAspectRatio="none">
-            <path class="pulse-line" d="M0 60 H70 l10 -8 l8 8 H120 l8 -48 l10 92 l10 -56 l6 12 H210 l10 -8 l8 8 H260 l8 -48 l10 92 l10 -56 l6 12 H350 l10 -8 l8 8 H400"/>
+          <svg class="pulse" viewBox="0 0 400 120">
+            <defs>
+              <linearGradient id="pulse-fade" x1="0" x2="400" y1="0" y2="0" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#68c8f2" stop-opacity="0"/>
+                <stop offset=".15" stop-color="#68c8f2"/>
+                <stop offset=".85" stop-color="#68c8f2"/>
+                <stop offset="1" stop-color="#68c8f2" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <path class="pulse-line" pathLength="100" d="M0 60 H70 l10 -8 l8 8 H120 l8 -48 l10 92 l10 -56 l6 12 H210 l10 -8 l8 8 H260 l8 -48 l10 92 l10 -56 l6 12 H350 l10 -8 l8 8 H400"/>
           </svg>
           <div class="hrv-chip"><span class="dot"></span>HRV&nbsp;<b>68</b>&nbsp;ms</div>
         </div>
