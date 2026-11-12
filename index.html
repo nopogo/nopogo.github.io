@@ -1,23 +1,444 @@
----
-layout: default
----
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n-title="meta.title">BRAVR: VR stress resilience training in Amsterdam</title>
+  <meta name="description" content="A 6-week VR + heart-rate biofeedback course in Amsterdam that trains you to stay calm under pressure. Reserve your place.">
+  <meta property="og:title" content="BRAVR: stay calm when it counts">
+  <meta property="og:description" content="6-week VR stress resilience course in Amsterdam. Limited places.">
+  <meta property="og:image" content="assets/img/bravr-logo.png">
+  <meta name="theme-color" content="#04234d">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23043D84'/%3E%3Cpath d='M4 17h6l2-6 4 12 3-9 2 3h7' fill='none' stroke='%2368C8F2' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/signup.js" defer></script>
+</head>
+<body>
 
-<div class="home">
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="#top" class="brand" aria-label="BRAVR home"><img src="assets/img/bravr-logo.png" alt="BRAVR" width="152" height="34"></a>
+    <nav class="nav" aria-label="Main">
+      <a href="#how" data-i18n="nav.how">How it works</a>
+      <a href="#course" data-i18n="nav.course">The course</a>
+      <a href="#pricing" data-i18n="nav.pricing">Pricing</a>
+      <a href="#faq" data-i18n="nav.faq">FAQ</a>
+    </nav>
+    <div class="header-actions">
+      <button type="button" class="lang-btn" data-lang-toggle data-i18n="lang.switch">Nederlands</button>
+      <a href="#signup" class="btn btn-sm" data-i18n="nav.cta">Reserve a place</a>
+    </div>
+  </div>
+</header>
 
-  <h1 class="page-heading">Posts</h1>
+<main id="top">
 
-  <ul class="post-list">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow" data-i18n="hero.eyebrow">New in Amsterdam</p>
+        <h1 data-i18n="hero.title">Stay calm when it counts.</h1>
+        <p class="hero-sub" data-i18n="hero.sub">A 6-week course where virtual reality and your own heartbeat train you to stay in control under pressure.</p>
+        <div class="hero-ctas">
+          <a href="#signup" class="btn btn-lg" data-i18n="hero.cta">Reserve your place</a>
+          <a href="#how" class="btn btn-ghost btn-lg" data-i18n="hero.secondary">How does it work?</a>
+        </div>
+        <ul class="hero-meta">
+          <li data-i18n="hero.m1">8 sessions of about 20 minutes</li>
+          <li data-i18n="hero.m2">Small groups</li>
+          <li data-i18n="hero.m3">Deposit</li>
+        </ul>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="vision">
+          <div class="vision-ring r1"></div>
+          <div class="vision-ring r2"></div>
+          <div class="vision-ring r3"></div>
+          <svg class="pulse" viewBox="0 0 400 120" preserveAspectRatio="none">
+            <path class="pulse-line" d="M0 60 H70 l10 -8 l8 8 H120 l8 -48 l10 92 l10 -56 l6 12 H210 l10 -8 l8 8 H260 l8 -48 l10 92 l10 -56 l6 12 H350 l10 -8 l8 8 H400"/>
+          </svg>
+          <div class="hrv-chip"><span class="dot"></span>HRV&nbsp;<b>68</b>&nbsp;ms</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <h2>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
-      </li>
-    {% endfor %}
-  </ul>
+  <!-- PROBLEM -->
+  <section class="section" id="problem">
+    <div class="wrap">
+      <h2 data-i18n="problem.title">Stress isn't the problem. Losing control is.</h2>
+      <p class="lead" data-i18n="problem.lead"></p>
+      <div class="cards three">
+        <article class="card">
+          <div class="card-ico"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.4-9.3-9A5.2 5.2 0 0 1 12 6a5.2 5.2 0 0 1 9.3 6c-2.3 4.6-9.3 9-9.3 9z"/></svg></div>
+          <h3 data-i18n="problem.c1t">Your body takes over</h3>
+          <p data-i18n="problem.c1b"></p>
+        </article>
+        <article class="card">
+          <div class="card-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg></div>
+          <h3 data-i18n="problem.c2t">Your decisions suffer</h3>
+          <p data-i18n="problem.c2b"></p>
+        </article>
+        <article class="card">
+          <div class="card-ico"><svg viewBox="0 0 24 24"><path d="M3 17l5-5 4 4 8-8"/><path d="M14 8h6v6"/></svg></div>
+          <h3 data-i18n="problem.c3t">It's trainable</h3>
+          <p data-i18n="problem.c3b"></p>
+        </article>
+      </div>
+    </div>
+  </section>
 
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
+  <!-- HOW -->
+  <section class="section section-dark" id="how">
+    <div class="wrap">
+      <h2 data-i18n="how.title">How it works</h2>
+      <p class="lead" data-i18n="how.lead"></p>
+      <ol class="steps">
+        <li>
+          <span class="step-n">1</span>
+          <h3 data-i18n="how.s1t">Your heart is measured</h3>
+          <p data-i18n="how.s1b"></p>
+        </li>
+        <li>
+          <span class="step-n">2</span>
+          <h3 data-i18n="how.s2t">The scenario reacts</h3>
+          <p data-i18n="how.s2b"></p>
+        </li>
+        <li>
+          <span class="step-n">3</span>
+          <h3 data-i18n="how.s3t">You learn to regain control</h3>
+          <p data-i18n="how.s3b"></p>
+        </li>
+      </ol>
+      <div class="loop" aria-hidden="true">
+        <span>↑ stress</span><span class="arrow">→</span><span>vision narrows</span><span class="arrow">→</span><span>breathe, reset</span><span class="arrow">→</span><span>world opens up</span>
+      </div>
+    </div>
+  </section>
 
-</div>
+  <!-- COURSE -->
+  <section class="section" id="course">
+    <div class="wrap">
+      <h2 data-i18n="course.title">The course</h2>
+      <p class="lead" data-i18n="course.lead"></p>
+      <dl class="facts">
+        <div><dt data-i18n="course.f1l">Duration</dt><dd data-i18n="course.f1v">6 weeks</dd></div>
+        <div><dt data-i18n="course.f2l">Sessions</dt><dd data-i18n="course.f2v">8 × ~20 min</dd></div>
+        <div><dt data-i18n="course.f3l">Group size</dt><dd data-i18n="course.f3v">Max. 8</dd></div>
+        <div><dt data-i18n="course.f4l">Location</dt><dd data-i18n="course.f4v">Amsterdam</dd></div>
+      </dl>
+      <div class="course-grid">
+        <div class="panel">
+          <h3 data-i18n="course.sessionTitle">Each session</h3>
+          <ol class="session-list">
+            <li data-i18n="course.st1"></li>
+            <li data-i18n="course.st2"></li>
+            <li data-i18n="course.st3"></li>
+          </ol>
+        </div>
+        <div class="panel">
+          <h3 data-i18n="course.levelsTitle">Four intensity levels</h3>
+          <p class="muted" data-i18n="course.levelsLead"></p>
+          <div class="levels">
+            <div class="level l1"><span data-i18n="course.l1">Light</span></div>
+            <div class="level l2"><span data-i18n="course.l2">Moderate</span></div>
+            <div class="level l3"><span data-i18n="course.l3">Intense</span></div>
+            <div class="level l4"><span data-i18n="course.l4">Overload</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCIENCE -->
+  <section class="section section-tint" id="science">
+    <div class="wrap">
+      <h2 data-i18n="science.title">Grounded in research</h2>
+      <p class="lead" data-i18n="science.lead"></p>
+      <ul class="papers">
+        <li><a href="https://www.researchgate.net/publication/26661667_Stress_inoculation_training_supported_by_physiology-driven_adaptive_virtual_reality_stimulation" target="_blank" rel="noopener">Stress inoculation training supported by physiology-driven adaptive virtual reality stimulation</a></li>
+        <li><a href="https://www.nature.com/articles/s41598-019-44201-7" target="_blank" rel="noopener">Voluntary upregulation of heart rate variability through biofeedback is improved by mental contemplative training</a> <span class="src">Scientific Reports</span></li>
+        <li><a href="https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2021.586553/full" target="_blank" rel="noopener">Breathing Biofeedback for Police Officers in a Stressful Virtual Environment: Challenges and Opportunities</a> <span class="src">Frontiers in Psychology</span></li>
+        <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10659241/" target="_blank" rel="noopener">Evaluation of a Virtual Reality Platform to Train Stress Management Skills for a Defense Workforce</a></li>
+      </ul>
+      <a class="text-link" href="https://bravr.io/" target="_blank" rel="noopener" data-i18n="science.more">See all research on bravr.io →</a>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="section" id="pricing">
+    <div class="wrap pricing-grid">
+      <div>
+        <h2 data-i18n="pricing.title">Secure your place</h2>
+        <p class="lead" data-i18n="pricing.lead"></p>
+        <ul class="checks">
+          <li data-i18n="pricing.i1"></li>
+          <li data-i18n="pricing.i2"></li>
+          <li data-i18n="pricing.i3"></li>
+          <li data-i18n="pricing.i4"></li>
+        </ul>
+      </div>
+      <div class="price-card">
+        <div class="price-row">
+          <span data-i18n="pricing.priceLabel">Full course</span>
+          <strong data-cfg="COURSE_PRICE"></strong>
+        </div>
+        <div class="price-row deposit">
+          <span data-i18n="pricing.depositLabel">Deposit today</span>
+          <strong data-cfg="DEPOSIT_AMOUNT"></strong>
+        </div>
+        <p class="small muted" data-i18n="pricing.depositNote"></p>
+        <a href="#signup" class="btn btn-block" data-i18n="pricing.cta">Sign up</a>
+        <p class="pay-logos small muted">iDEAL · Visa · Mastercard · Apple Pay</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIGNUP -->
+  <section class="section section-tint" id="signup">
+    <div class="wrap narrow">
+      <h2 data-i18n="form.title">Sign up</h2>
+      <p class="lead" data-i18n="form.lead"></p>
+
+      <form id="signup-form" class="form" novalidate>
+        <div class="form-summary" id="form-summary" role="alert" hidden></div>
+
+        <!-- About -->
+        <fieldset class="form-section">
+          <legend data-i18n="form.sAbout">About you</legend>
+          <div class="row two">
+            <div class="field">
+              <label for="f-first" data-i18n="form.firstName">First name</label>
+              <input id="f-first" name="firstName" autocomplete="given-name" required>
+              <p class="err"></p>
+            </div>
+            <div class="field">
+              <label for="f-last" data-i18n="form.lastName">Last name</label>
+              <input id="f-last" name="lastName" autocomplete="family-name" required>
+              <p class="err"></p>
+            </div>
+          </div>
+          <div class="row two">
+            <div class="field">
+              <label for="f-email" data-i18n="form.email">Email</label>
+              <input id="f-email" name="email" type="email" autocomplete="email" data-rx="email" required>
+              <p class="err"></p>
+            </div>
+            <div class="field">
+              <label for="f-phone" data-i18n="form.phone">Phone</label>
+              <input id="f-phone" name="phone" type="tel" autocomplete="tel" data-rx="phone" placeholder="+31 6 12345678" required>
+              <p class="err"></p>
+            </div>
+          </div>
+          <div class="row two">
+            <div class="field">
+              <label for="f-age" data-i18n="form.age">Age</label>
+              <select id="f-age" name="ageRange" required>
+                <option value="" data-i18n="form.select">Select…</option>
+                <option>18–24</option><option>25–34</option><option>35–44</option>
+                <option>45–54</option><option>55–64</option><option>65+</option>
+              </select>
+              <p class="err"></p>
+            </div>
+            <div class="field">
+              <label for="f-pc" data-i18n="form.postcode">Postcode</label>
+              <input id="f-pc" name="postcode" autocomplete="postal-code" data-rx="postcode" data-i18n-ph="form.postcodePh" maxlength="7" required>
+              <p class="err"></p>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Profile -->
+        <fieldset class="form-section">
+          <legend data-i18n="form.sProfile">Your situation</legend>
+          <div class="row two">
+            <div class="field">
+              <label for="f-occ" data-i18n="form.occupation">What do you do?</label>
+              <select id="f-occ" name="occupation" required>
+                <option value="" data-i18n="form.select">Select…</option>
+                <option value="office" data-i18n="form.occ.office">Office / corporate</option>
+                <option value="healthcare" data-i18n="form.occ.healthcare">Healthcare</option>
+                <option value="education" data-i18n="form.occ.education">Education</option>
+                <option value="security" data-i18n="form.occ.security">Security / police / defence</option>
+                <option value="creative" data-i18n="form.occ.creative">Creative / performing arts</option>
+                <option value="hospitality" data-i18n="form.occ.hospitality">Hospitality / retail</option>
+                <option value="student" data-i18n="form.occ.student">Student</option>
+                <option value="self-employed" data-i18n="form.occ.self">Self-employed</option>
+                <option value="other" data-i18n="form.occ.other">Other</option>
+              </select>
+              <p class="err"></p>
+            </div>
+            <div class="field" id="occ-other-wrap" hidden>
+              <label for="f-occ-other" data-i18n="form.occOther">Other, namely</label>
+              <input id="f-occ-other" name="occupationOther">
+              <p class="err"></p>
+            </div>
+          </div>
+
+          <fieldset class="choice-group" data-required-group>
+            <legend data-i18n="form.stress">Where do you feel stress most?</legend>
+            <div class="chips">
+              <label class="chip"><input type="checkbox" name="stressSources" value="work"><span data-i18n="form.st.work">Work</span></label>
+              <label class="chip"><input type="checkbox" name="stressSources" value="public-speaking"><span data-i18n="form.st.speaking">Public speaking</span></label>
+              <label class="chip"><input type="checkbox" name="stressSources" value="exams"><span data-i18n="form.st.exams">Exams</span></label>
+              <label class="chip"><input type="checkbox" name="stressSources" value="conflict"><span data-i18n="form.st.conflict">Conflict</span></label>
+              <label class="chip"><input type="checkbox" name="stressSources" value="sport"><span data-i18n="form.st.sport">Sport</span></label>
+              <label class="chip"><input type="checkbox" name="stressSources" value="daily-life"><span data-i18n="form.st.daily">Daily life</span></label>
+              <label class="chip"><input type="checkbox" name="stressSources" value="other"><span data-i18n="form.st.other">Other</span></label>
+            </div>
+            <p class="err"></p>
+          </fieldset>
+
+          <fieldset class="choice-group" data-required-group>
+            <legend data-i18n="form.vr">Have you used VR before?</legend>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="vrExperience" value="none"><span data-i18n="form.vr.none">Never</span></label>
+              <label class="chip"><input type="radio" name="vrExperience" value="some"><span data-i18n="form.vr.some">A few times</span></label>
+              <label class="chip"><input type="radio" name="vrExperience" value="regular"><span data-i18n="form.vr.regular">Regularly</span></label>
+            </div>
+            <p class="err"></p>
+          </fieldset>
+
+          <div class="field">
+            <label for="f-goal" data-i18n="form.goal">What would you like to get out of the course? (optional)</label>
+            <textarea id="f-goal" name="goal" rows="3" maxlength="1000"></textarea>
+            <p class="err"></p>
+          </div>
+        </fieldset>
+
+        <!-- Planning -->
+        <fieldset class="form-section">
+          <legend data-i18n="form.sPlanning">Planning</legend>
+          <fieldset class="choice-group" data-required-group>
+            <legend data-i18n="form.schedule">When could you attend?</legend>
+            <div class="chips">
+              <label class="chip"><input type="checkbox" name="schedule" value="weekday-daytime"><span data-i18n="form.sch.wdDay">Weekdays, daytime</span></label>
+              <label class="chip"><input type="checkbox" name="schedule" value="weekday-evening"><span data-i18n="form.sch.wdEve">Weekday evenings</span></label>
+              <label class="chip"><input type="checkbox" name="schedule" value="weekend"><span data-i18n="form.sch.weekend">Weekends</span></label>
+            </div>
+            <p class="err"></p>
+          </fieldset>
+          <div class="row two">
+            <div class="field">
+              <label for="f-start" data-i18n="form.start">Earliest start</label>
+              <select id="f-start" name="earliestStart" required>
+                <option value="" data-i18n="form.select">Select…</option>
+                <option value="asap" data-i18n="form.start.asap">As soon as possible</option>
+                <option value="1-3-months" data-i18n="form.start.1to3">In 1–3 months</option>
+                <option value="3plus-months" data-i18n="form.start.3plus">In 3+ months</option>
+                <option value="unsure" data-i18n="form.start.unsure">Not sure yet</option>
+              </select>
+              <p class="err"></p>
+            </div>
+            <div class="field">
+              <label for="f-src" data-i18n="form.source">How did you hear about us?</label>
+              <select id="f-src" name="source" required>
+                <option value="" data-i18n="form.select">Select…</option>
+                <option value="social" data-i18n="form.src.social">Social media</option>
+                <option value="friend" data-i18n="form.src.friend">Friend / colleague</option>
+                <option value="search" data-i18n="form.src.search">Search engine</option>
+                <option value="employer" data-i18n="form.src.employer">Employer</option>
+                <option value="event" data-i18n="form.src.event">Event / flyer</option>
+                <option value="other" data-i18n="form.src.other">Other</option>
+              </select>
+              <p class="err"></p>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Finish -->
+        <fieldset class="form-section">
+          <legend data-i18n="form.sFinish">Finish</legend>
+
+          <fieldset class="choice-group">
+            <legend data-i18n="form.intent">What would you like to do?</legend>
+            <div class="intent">
+              <label class="intent-opt"><input type="radio" name="intent" value="deposit" checked><span data-i18n="form.intent.deposit">Reserve my place</span></label>
+              <label class="intent-opt"><input type="radio" name="intent" value="interest"><span data-i18n="form.intent.interest">Just keep me informed</span></label>
+            </div>
+          </fieldset>
+
+          <div class="field discount">
+            <label for="f-code" data-i18n="form.discount">Discount code (optional)</label>
+            <input id="f-code" name="discountCode" autocomplete="off" autocapitalize="characters" maxlength="40">
+            <p class="hint" data-i18n="form.discountHelp">Applied at checkout.</p>
+            <p class="err"></p>
+          </div>
+
+          <div class="field check">
+            <label><input type="checkbox" name="consentPrivacy" required><span data-i18n-html="form.cPrivacy">I agree to the privacy notice.</span></label>
+            <p class="err"></p>
+          </div>
+          <div class="field check">
+            <label><input type="checkbox" name="consentHealth" required><span data-i18n="form.cHealth">I don't have photosensitive epilepsy.</span></label>
+            <p class="err"></p>
+          </div>
+          <div class="field check">
+            <label><input type="checkbox" name="consentNews"><span data-i18n="form.cNews">Send me updates (optional).</span></label>
+          </div>
+
+          <!-- honeypot -->
+          <div class="hp" aria-hidden="true">
+            <label for="f-website">Website</label>
+            <input id="f-website" name="website" tabindex="-1" autocomplete="off">
+          </div>
+
+          <button type="submit" class="btn btn-lg btn-block">Continue to payment</button>
+          <p class="small muted center" data-i18n="form.secure">Payments are handled securely by Stripe.</p>
+        </fieldset>
+      </form>
+
+      <div class="form-done" id="form-done" tabindex="-1" hidden>
+        <div class="done-ico">✓</div>
+        <h3 data-i18n="done.title">You're on the list!</h3>
+        <p data-i18n="done.body"></p>
+        <p class="done-note"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <div class="wrap narrow">
+      <h2 data-i18n="faq.title">Frequently asked questions</h2>
+      <div class="faq">
+        <details><summary data-i18n="faq.q1"></summary><p data-i18n="faq.a1"></p></details>
+        <details><summary data-i18n="faq.q2"></summary><p data-i18n="faq.a2"></p></details>
+        <details><summary data-i18n="faq.q3"></summary><p data-i18n="faq.a3"></p></details>
+        <details><summary data-i18n="faq.q4"></summary><p data-i18n="faq.a4"></p></details>
+        <details><summary data-i18n="faq.q5"></summary><p data-i18n="faq.a5"></p></details>
+        <details><summary data-i18n="faq.q6"></summary><p data-i18n="faq.a6"></p></details>
+      </div>
+
+      <div class="privacy" id="privacy">
+        <h3 data-i18n="privacy.title">Privacy notice</h3>
+        <p class="small" data-i18n-html="privacy.body"></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <span class="footer-logo-wrap"><img src="assets/img/bravr-logo.png" alt="BRAVR" width="152" height="34"></span>
+      <p class="small" data-i18n="footer.tag">Master your instincts.</p>
+    </div>
+    <div class="footer-links small">
+      <a href="https://bravr.io/" target="_blank" rel="noopener" data-i18n="footer.b2b">For organisations</a>
+      <a href="https://www.linkedin.com/company/bravr-technologies" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="#privacy" data-i18n="privacy.title">Privacy notice</a>
+      <button type="button" class="lang-btn" data-lang-toggle data-i18n="lang.switch">Nederlands</button>
+    </div>
+    <p class="small muted footer-legal">© 2026 BRAVR Technologies BV · KVK 97265896</p>
+  </div>
+</footer>
+
+</body>
+</html>
