@@ -13,7 +13,6 @@ window.BRAVR_CONFIG = {
   // Display values only — the real amount charged is set in Stripe.
   DEPOSIT_AMOUNT: "€50",
   COURSE_PRICE: "€395",
-  SEATS_PER_GROUP: 8,
 
   // Shown on the page in both languages.
   START_DATES: { en: "Spring 2027", nl: "Voorjaar 2027" },

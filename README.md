@@ -42,7 +42,7 @@ When someone pays, the page sends these values to Stripe:
 The Sheet's `paid` column starts as `pending`. Mark it `yes` yourself after checking the Stripe dashboard, which shows the Client reference ID on every payment.
 
 ### 3. Content
-- **Prices, dates, location and group size:** `assets/js/config.js`.
+- **Prices, dates and location:** `assets/js/config.js`.
 - **All other text, in both languages:** `assets/js/i18n.js`. Check the refund wording (`pricing.depositNote` and `faq.a4`) against your actual policy.
 
 ### Useful links

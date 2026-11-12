@@ -1,4 +1,4 @@
-// NL/EN strings. Placeholders {deposit} {price} {dates} {location} {seats} come from config.js.
+// NL/EN strings. Placeholders {deposit} {price} {dates} {location} come from config.js.
 // data-i18n = textContent, data-i18n-html = innerHTML, data-i18n-ph = placeholder, data-i18n-aria = aria-label
 (function () {
   const STR = {
@@ -17,7 +17,6 @@
       "hero.cta": "Reserve your place",
       "hero.secondary": "How does it work?",
       "hero.m1": "8 sessions of about 20 minutes",
-      "hero.m2": "Groups of max. {seats}",
       "hero.m3": "Deposit {deposit}",
 
       "problem.title": "Stress isn't the problem. Losing control is.",
@@ -39,13 +38,11 @@
       "how.s3b": "When you calm down, the world opens up again. Your nervous system learns what works.",
 
       "course.title": "The course",
-      "course.lead": "A structured programme that steps up in intensity, guided by a trainer, in small groups.",
+      "course.lead": "A structured programme that steps up in intensity, guided by a trainer.",
       "course.f1l": "Duration",
       "course.f1v": "6 weeks",
       "course.f2l": "Sessions",
       "course.f2v": "8 × ~20 min",
-      "course.f3l": "Group size",
-      "course.f3v": "Max. {seats}",
       "course.f4l": "Location",
       "course.f4v": "{location}",
       "course.sessionTitle": "Each session",
@@ -64,7 +61,7 @@
       "science.more": "See all research on bravr.io →",
 
       "pricing.title": "Secure your place",
-      "pricing.lead": "Groups are small, so places are limited. A deposit guarantees your spot in the first round.",
+      "pricing.lead": "Places in the first round are limited. A deposit guarantees your spot in the first round.",
       "pricing.priceLabel": "Full course",
       "pricing.depositLabel": "Deposit today",
       "pricing.depositNote": "Deducted from the course price. Fully refundable until the course schedule is confirmed.",
@@ -179,7 +176,7 @@
       "thanks.body": "Thank you! We've received your deposit. You'll get a payment receipt from Stripe by email, and we'll contact you as soon as the course dates are set.",
       "thanks.next": "What happens next?",
       "thanks.n1": "We confirm the schedule and venue.",
-      "thanks.n2": "You choose your group and time slot.",
+      "thanks.n2": "You choose your time slots.",
       "thanks.n3": "Your first session: calibration and your first training set.",
       "thanks.back": "Back to home"
     },
@@ -199,7 +196,6 @@
       "hero.cta": "Reserveer je plek",
       "hero.secondary": "Hoe werkt het?",
       "hero.m1": "8 sessies van ca. 20 minuten",
-      "hero.m2": "Groepen van max. {seats}",
       "hero.m3": "Aanbetaling {deposit}",
 
       "problem.title": "Stress is niet het probleem. De controle verliezen wel.",
@@ -221,13 +217,11 @@
       "how.s3b": "Als je tot rust komt, opent de wereld zich weer. Je zenuwstelsel leert wat werkt.",
 
       "course.title": "De cursus",
-      "course.lead": "Een gestructureerd programma dat in intensiteit opbouwt, onder begeleiding van een trainer, in kleine groepen.",
+      "course.lead": "Een gestructureerd programma dat in intensiteit opbouwt, onder begeleiding van een trainer.",
       "course.f1l": "Duur",
       "course.f1v": "6 weken",
       "course.f2l": "Sessies",
       "course.f2v": "8 × ca. 20 min",
-      "course.f3l": "Groepsgrootte",
-      "course.f3v": "Max. {seats}",
       "course.f4l": "Locatie",
       "course.f4v": "{location}",
       "course.sessionTitle": "Elke sessie",
@@ -246,7 +240,7 @@
       "science.more": "Al het onderzoek op bravr.io →",
 
       "pricing.title": "Zeker van je plek",
-      "pricing.lead": "De groepen zijn klein, dus er zijn maar weinig plekken. Met een aanbetaling ben je verzekerd van een plek in de eerste ronde.",
+      "pricing.lead": "Het aantal plekken in de eerste ronde is beperkt. Met een aanbetaling ben je verzekerd van een plek in de eerste ronde.",
       "pricing.priceLabel": "Volledige cursus",
       "pricing.depositLabel": "Aanbetaling nu",
       "pricing.depositNote": "Wordt verrekend met de cursusprijs. Volledig terugbetaalbaar tot het rooster definitief is.",
@@ -361,7 +355,7 @@
       "thanks.body": "Bedankt! We hebben je aanbetaling ontvangen. Je krijgt een betaalbewijs van Stripe per e-mail, en we nemen contact met je op zodra de cursusdata vastliggen.",
       "thanks.next": "Hoe gaat het verder?",
       "thanks.n1": "We bevestigen het rooster en de locatie.",
-      "thanks.n2": "Jij kiest je groep en tijdslot.",
+      "thanks.n2": "Jij kiest je tijdsloten.",
       "thanks.n3": "Je eerste sessie: kalibratie en je eerste trainingsset.",
       "thanks.back": "Terug naar home"
     }
@@ -373,7 +367,7 @@
   function fill(s, lang) {
     return s.replace(/\{(\w+)\}/g, (m, k) => {
       const map = {
-        deposit: cfg.DEPOSIT_AMOUNT, price: cfg.COURSE_PRICE, seats: cfg.SEATS_PER_GROUP,
+        deposit: cfg.DEPOSIT_AMOUNT, price: cfg.COURSE_PRICE,
         dates: cfg.START_DATES && cfg.START_DATES[lang],
         location: cfg.LOCATION && cfg.LOCATION[lang]
       };
