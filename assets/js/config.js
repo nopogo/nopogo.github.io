@@ -4,7 +4,7 @@
 window.BRAVR_CONFIG = {
   // Google Apps Script web-app URL (see README, step 1).
   // Leave empty to run in "demo mode" (submissions are logged to the console only).
-  APPS_SCRIPT_URL: "",
+  APPS_SCRIPT_URL: "https://script.google.com/a/macros/bravr.io/s/AKfycbyk948VEH6PJ44OPuQcWyptJBwD7NM_mXJG8-2pcJF_DzU-mrTa9FQo2A0r5zd7p3XAfA/exec",
 
   // Stripe Payment Link for the deposit (see README, step 2).
   // Use a test-mode link (https://buy.stripe.com/test_...) while testing.
