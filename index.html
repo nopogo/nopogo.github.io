@@ -31,7 +31,7 @@
 <span style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #A9BCCD; border-left: 1px solid #23415E; padding-left: 14px">× [PARTNER GYM]</span>
 </div>
 <div style="display: flex; align-items: center; gap: 12px">
-<button type="button" class="lang-toggle" data-lang-toggle aria-label="Nederlands">NL</button>
+<div class="lang" role="group" aria-label="Language"><button type="button" aria-pressed="{{langEn}}" onClick="{{pickEn}}">EN</button><button type="button" aria-pressed="{{langNl}}" onClick="{{pickNl}}">NL</button></div>
 <a href="#book" style="{{ctaStyle}}">Reserve a place</a>
 </div>
 </header>
@@ -170,7 +170,9 @@
 <div style="{{rv3s}}">
 <figure style="{{qPhotoWrap}}">
 <div class="float" style="position: relative; border-radius: 20px; overflow: hidden; aspect-ratio: 16 / 10; border: 1px solid #17304A; background: #0A1C2C">
-<img src="assets/img/police-pilot.jpg" alt="Police officers gathered round a BRAVR unit during a briefing at the UK pilot. Faces and identifying details are blurred." style="{{qPhoto}}">
+<img src="assets/img/police-pilot.jpg" alt="Police officers gathered round a BRAVR unit during a briefing at the UK pilot. Faces and identifying details are blurred." style="{{qPhoto1}}">
+<img src="assets/img/police-pilot-2.jpg" alt="An officer in a VR headset mid-session while the rest of the team gathers round the BRAVR unit. Faces and identifying details are blurred." style="{{qPhoto2}}">
+<img src="assets/img/police-pilot-3.jpg" alt="An officer in a VR headset trains inside a taped square on the floor while colleagues and BRAVR staff look on. Faces and identifying details are blurred." style="{{qPhoto0}}">
 <div aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(3,17,30,0.75) 0%, rgba(0,0,0,0) 45%)"></div>
 <span style="position: absolute; left: 18px; bottom: 16px; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #F6FBFF">UK police pilot • 2026</span>
 </div>
@@ -293,6 +295,7 @@
 
 <sc-if value="{{showNeedSlot}}" hint-placeholder-val="{{true}}">
 <div style="background: #0A1C2C; border: 1px solid #17304A; border-radius: 20px; padding: var(--s-card); box-sizing: border-box; display: flex; flex-wrap: wrap; gap: 16px 32px; align-items: center; justify-content: space-between">
+<sc-if value="{{clashErr}}"><p role="alert" style="flex: 1 1 100%; color: #F86C73; font-weight: 600">Someone just booked that slot. Nothing was charged. Pick another time and you are back on track.</p></sc-if>
 <p style="color: #C9D6E2; flex: 1 1 280px">You haven't picked your slot yet. Choose a length and a time first, then come back here.</p>
 <a href="#book" style="border: 1px solid #04C1E2; color: #04C1E2; text-decoration: none; font-weight: 600; font-size: 16px; padding: 12px 22px; border-radius: 999px; min-height: 44px; box-sizing: border-box; display: inline-flex; align-items: center">Choose your slot</a>
 </div>

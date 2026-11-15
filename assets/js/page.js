@@ -11,6 +11,8 @@ class Component extends DCLogic {
 componentDidMount() {
 const back = window.BRAVR_BOOKING && window.BRAVR_BOOKING.restore();
 { const q = new URLSearchParams(location.search); const mc = (q.get('code') || '').trim(), cc = (q.get('ccode') || q.get('promo') || '').trim(); if (mc || cc) this.setState({ f: Object.assign({}, this.state.f || {}, mc ? { code: mc } : { ccode: cc }) }); }
+this._loadTaken = () => { if (document.hidden || this._sending) return; window.BRAVR_BOOKING.taken().then((t) => { if (t) this.setState({ taken: t }); }); };
+this._loadTaken(); this._takenTimer = setInterval(this._loadTaken, 60000);
 if (back) { this.setState(back); setTimeout(() => { const el = document.getElementById('book'); if (el) el.scrollIntoView(); }, 60); }
 this._onPin = () => { if (this._canvasMode) return; const on = (window.scrollY || 0) > 140; if (on !== !!(this.state && this.state.pinCta)) this.setState({ pinCta: on }); };
 window.addEventListener('scroll', this._onPin, { passive: true });
@@ -227,13 +229,14 @@ const DS = (d) => T(d);
 const times = ['07:30', '08:15', '12:30', '13:15', '17:30', '18:15', '19:00'];
 const months = [T('Jan'), T('Feb'), T('Mar')];
 const starts = [{ label: 'Week of 18 Jan', y: 2027, m: 0, d: 18 }];
-const baseFull = { 'Wed 07:30': 1, 'Thu 17:30': 1, 'Tue 18:15': 1, 'Mon 19:00': 1 };
-const extraFull = { 2: 'Fri 08:15', 3: 'Mon 12:30', 4: 'Thu 07:30' };
+const baseFull = {};
+const extraFull = {};
 const st = starts[startIx];
 const dateFor = (w, i) => new Date(st.y, st.m, st.d + (w - 1) * 7 + i);
 const fmt = (dt) => dt.getDate() + ' ' + months[dt.getMonth()];
 const isClosed = (day, t) => day === 'Sat' && t >= '17:30';
-const fullIn = (key, w) => !!baseFull[key] || extraFull[w] === key;
+const takenMap = S.taken || {}; const mineMap = {}; (S.mine || []).forEach((k) => { mineMap[k] = 1; });
+const fullIn = (key, w) => !!baseFull[key] || extraFull[w] === key || (!!takenMap[w + ':' + key] && !mineMap[w + ':' + key]);
 const isSame = pattern === 'same';
 const isDouble = len === 'double';
 const blocks = [['07:30', '08:15'], ['12:30', '13:15'], ['17:30', '18:15', '19:00']];
@@ -295,11 +298,11 @@ label, style, selected, disabled: closed || full || noPair,
 aria: (isSame ? dayLong[d] : DS(d) + ' ' + fmt(dateFor(week, days.indexOf(d)))) + ' ' + t + ', ' + (closed ? T('not available') : full ? T('full') : noPair ? T('no free slot next to it for a double') : selected ? T('selected') + (isDouble && curSel ? T(', together with ') + curSel.ts.filter((x) => x !== t)[0] : '') : T('open') + (isDouble ? T(', books two slots') : '')),
 pick: () => {
 if (closed || full || noPair) return;
-if (isSame) { set({ same: key }); return; }
+if (isSame) { set({ same: key, clashErr: false }); return; }
 const np = Object.assign({}, picks); np[week] = key;
 let next = week;
 for (let k = 1; k <= 4; k++) { const w = ((week - 1 + k) % 4) + 1; if (!np[w]) { next = w; break; } }
-set({ picks: np, week: next });
+set({ picks: np, week: next, clashErr: false });
 }
 };
 })
@@ -335,6 +338,7 @@ const medOpts = [['no', T('No')], ['yes', T('Yes')], ['skip', T("I'd rather not 
 const confirmed = !!S.confirmed;
 const bookingLines = [{ label: T('Session'), value: isDouble ? T('Double · 60 min × 4') : T('Single · 30 min × 4') }].concat(
 isSame ? [{ label: isDouble ? T('Weekly slots') : T('Weekly slot'), value: sameSel ? slotText : T('Not chosen') }] : picksList.map((p) => ({ label: p.week, value: p.value })));
+const myKeys = []; [1, 2, 3, 4].forEach((w) => { const k = selFor(w); if (k) k.ts.forEach((t) => myKeys.push(w + ':' + k.d + ' ' + t)); });
 let firstText = '';
 { const f1 = selFor(1); if (f1) firstText = DS(f1.d) + ' ' + fmt(dateFor(1, days.indexOf(f1.d))) + T(' at ') + f1.ts[0]; }
 const submitBooking = (e) => {
@@ -352,13 +356,20 @@ health: F.health ? 'none apply' : '', meds: F.meds || '', consent: F.consent ? '
 length: len, pattern, slots: slotSummary, firstSession: firstText, startWeek: st.label,
 price: '€' + price, deposit: '€25', dueAtFirstSession: '€' + (price - 25), website: F.website || ''
 };
-const ui = { len, pattern, same: S.same || null, picks, week, f: Object.assign({}, F, { website: '' }), ref, confirmed: true };
+payload.slotKeys = myKeys.join(', ');
+payload.slotPlain = isSame ? sameSel.d + ' ' + sameSel.ts.join('+') + ' weekly' : [1, 2, 3, 4].map((w) => { const k = selFor(w); return 'W' + w + ' ' + k.d + ' ' + k.ts.join('+'); }).join(' | ');
+const ui = { len, pattern, same: S.same || null, picks, week, f: Object.assign({}, F, { website: '' }), ref, confirmed: true, mine: myKeys };
 this._sending = true;
-this.setState({ sending: true, sendErr: false, tried: false });
-B.submit(payload, ui).then((res) => {
-if (res && res.redirect) { window.location.href = res.redirect; return; }
+this.setState({ sending: true, sendErr: false, tried: false, clashErr: false });
+// last look at the sheet: has someone taken one of these slots in the meantime?
+B.taken().then((t) => {
+if (t && myKeys.some((k) => t[k])) { this._sending = false; this.setState({ sending: false, taken: t, clashErr: true }); return null; }
+return B.submit(payload, ui);
+}).then((res) => {
+if (!res) return;
+if (res.redirect) { window.location.href = res.redirect; return; }
 this._sending = false;
-this.setState({ sending: false, confirmed: true, ref });
+this.setState({ sending: false, confirmed: true, ref, mine: myKeys });
 }).catch(() => { this._sending = false; this.setState({ sending: false, sendErr: true }); });
 };
 const gPinned = !!this.props.graphFinal || !!S.graphPinned;
@@ -474,13 +485,14 @@ setQWrap: (el) => { this.qWrap = el; }, setQStick: (el) => { this.qStick = el; }
 qStickStyle: 'position: sticky; top: 48px; display: flex; flex-direction: column; gap: min(var(--s-intro), 5vh); transition: transform 250ms ease-out; transform: translateY(' + (S.qShift || 0) + 'px)',
 qsentinels: Array.from({ length: 60 }, (_, i) => ({ ref: (el) => { this._qsent = this._qsent || []; this._qsent[i] = el; }, style: 'position: absolute; left: 0; width: 1px; height: 1px; top: ' + (i * 100 / 60) + '%' })),
 qPhotoWrap: 'flex: 1 1 420px; min-width: 0; margin: 0; ' + (qStatic ? 'opacity: 1;' : 'transition: opacity 900ms cubic-bezier(.2,.8,.2,1), transform 900ms cubic-bezier(.2,.8,.2,1); ' + (qOn ? 'opacity: 1; transform: none;' : 'opacity: 0; transform: translateX(40px);')),
-qPhoto: 'position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transform-origin: 55% 45%; ' + (qStatic ? '' : 'transition: transform 1400ms cubic-bezier(.2,.8,.2,1); ') + 'transform: scale(' + qp[0] + ') translate(' + qp[1] + '%, ' + qp[2] + '%);',
+...(() => { const out = {}; const act = qOn ? qActive : 0; [0, 1, 2].forEach((i) => { const on = i === act; const q = on ? qp : [1.04, 0, 0]; out['qPhoto' + i] = 'position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transform-origin: 55% 45%; ' + (qStatic ? '' : 'transition: opacity 900ms ease, transform 1400ms cubic-bezier(.2,.8,.2,1); ') + 'opacity: ' + (on ? 1 : 0) + '; transform: scale(' + q[0] + ') translate(' + q[1] + '%, ' + q[2] + '%);'; }); return out; })(),
 qdot0: qdot(0), qdot1: qdot(1), qdot2: qdot(2),
 setQuotes: (el) => { this.quotesEl = el; }, quote0: quoteAnim(0), quote1: quoteAnim(1), quote2: quoteAnim(2),
 rvRef7: (el) => { this._rvEls = this._rvEls || []; this._rvEls[7] = el; }, rv7h: rv(7, 1, ''), rv7e: rv(7, 0),
 rv7s: rv(7, 2, 'flex: 1 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 20px; '),
 rvRef8: (el) => { this._rvEls = this._rvEls || []; this._rvEls[8] = el; }, pf0: rv(8, 0, ''), pf1: rv(8, 2, ''), pf2: rv(8, 4, ''), pf3: rv(8, 6, ''), pfC: rv(8, 8, ''),
 pfLine: rv(8, 9, 'margin: clamp(40px, 4vw, 56px) auto 0; max-width: 820px; text-align: center; font-size: clamp(20px, 2.2vw, 26px); line-height: 1.4; font-weight: 500; color: #F6FBFF; text-wrap: balance; '),
+...(() => { const I = window.I18N; const lang = I ? I.lang : (S.lang || 'en'); const pick = (l) => () => { if (I) { if (l !== I.lang) I.setLang(l); } else this.setState({ lang: l }); }; return { langEn: lang === 'en' ? 'true' : 'false', langNl: lang === 'nl' ? 'true' : 'false', pickEn: pick('en'), pickNl: pick('nl') }; })(),
 noticeOn: this.props.showNotice !== false && !S.noticeClosed,
 closeNotice: () => this.setState({ noticeClosed: true }),
 pgsent: Array.from({ length: 300 }, (_, i) => ({ ref: (el) => { this._pgs = this._pgs || []; this._pgs[i] = el; }, style: 'position: absolute; left: 0; width: 1px; height: 1px; top: ' + (i / 3) + '%' })),
@@ -549,7 +561,7 @@ bookingLines, firstText, confirmed,
 showNeedSlot: !complete && !confirmed, showCheckout: complete && !confirmed,
 showErr: (!!S.tried && missing.length > 0) || !!S.sendErr, errText: S.sendErr ? T('Something went wrong sending your booking. Try again, or email build@bravr.io.') : T('Still needed: ') + missing.join(', ') + '.',
 fWebsite: F.website || '', onWebsite: field('website'),
-sending: !!S.sending,
+sending: !!S.sending, clashErr: !!S.clashErr,
 submitBooking, bookingRef: S.ref || '', editBooking: () => this.setState({ confirmed: false })
 };
 }

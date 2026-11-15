@@ -21,8 +21,7 @@
     // ---- notice bar + header
     'Demo Activation coming soon • Join us at [PARTNER LOCATION]': 'Demo-activatie binnenkort • Kom langs bij [PARTNER LOCATION]',
     'Reserve a place': 'Reserveer een plek',
-    'NL': 'EN',
-    '@Nederlands': 'English',
+    '@Language': 'Taal',
     '@Notice': 'Mededeling',
     '@Close notice': 'Mededeling sluiten',
 
@@ -110,6 +109,8 @@
     '“I was able to step back, look around, understand the broader team\'s positioning, and take decisive action.”': '“Ik kon een stap terug doen, om me heen kijken, de positie van het hele team overzien en daadkrachtig handelen.”',
     'Participant, describing a moment in a live exercise, UK police pilot, 2026': 'Deelnemer, over een moment tijdens een live-oefening, pilot Britse politie, 2026',
     '@Police officers gathered round a BRAVR unit during a briefing at the UK pilot. Faces and identifying details are blurred.': 'Politieagenten rond een BRAVR-unit tijdens een briefing bij de Britse pilot. Gezichten en herkenbare details zijn vervaagd.',
+    '@An officer in a VR headset trains inside a taped square on the floor while colleagues and BRAVR staff look on. Faces and identifying details are blurred.': 'Een agent met een VR-headset traint binnen een afgeplakt vierkant op de vloer terwijl collega’s en BRAVR-medewerkers toekijken. Gezichten en herkenbare details zijn vervaagd.',
+    '@An officer in a VR headset mid-session while the rest of the team gathers round the BRAVR unit. Faces and identifying details are blurred.': 'Een agent met een VR-headset midden in een sessie terwijl de rest van het team rond de BRAVR-unit staat. Gezichten en herkenbare details zijn vervaagd.',
     '@Quotes': 'Citaten',
     '@Show quote 1 of 3': 'Toon citaat 1 van 3',
     '@Show quote 2 of 3': 'Toon citaat 2 van 3',
@@ -147,6 +148,7 @@
     'A few details, a quick health check, and a €25 deposit. Fully refundable up to 7 days before your first session.': 'Een paar gegevens, een korte gezondheidscheck en een aanbetaling van €25. Volledig terug te krijgen tot 7 dagen voor je eerste sessie.',
     "You haven't picked your slot yet. Choose a length and a time first, then come back here.": 'Je hebt nog geen tijd gekozen. Kies eerst een duur en een tijd, en kom dan hier terug.',
     'Choose your slot': 'Kies je tijd',
+    'Someone just booked that slot. Nothing was charged. Pick another time and you are back on track.': 'Iemand heeft die tijd net geboekt. Er is niets afgeschreven. Kies een andere tijd en je kunt weer verder.',
     '1 · Your details': '1 · Je gegevens',
     'Name': 'Naam',
     'Email': 'E-mail',
@@ -316,6 +318,7 @@
   }
 
   function setLang(l) {
+    if (l !== 'nl' && l !== 'en') return;
     try { localStorage.setItem('bravr-lang', l); } catch (e) {}
     var u = new URL(location.href);
     u.searchParams.delete('lang');
@@ -324,8 +327,12 @@
 
   document.documentElement.lang = lang;
   document.addEventListener('click', function (e) {
-    var b = e.target && e.target.closest && e.target.closest('[data-lang-toggle]');
-    if (b) { e.preventDefault(); setLang(lang === 'nl' ? 'en' : 'nl'); }
+    var b = e.target && e.target.closest && e.target.closest('[data-lang]');
+    if (b) { e.preventDefault(); if (b.getAttribute('data-lang') !== lang) setLang(b.getAttribute('data-lang')); }
+  });
+  document.addEventListener('DOMContentLoaded', function () {
+    var bs = document.querySelectorAll('[data-lang]');
+    for (var k = 0; k < bs.length; k++) bs[k].setAttribute('aria-pressed', bs[k].getAttribute('data-lang') === lang ? 'true' : 'false');
   });
   if (lang === 'nl') {
     document.addEventListener('DOMContentLoaded', function () {

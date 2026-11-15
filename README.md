@@ -24,6 +24,14 @@ apps-script/Code.gs      Google Apps Script that writes bookings to the Sheet
 
 Bookings land on the `Signups` tab. If that tab already exists with the old columns, new columns are added on the right automatically. For a clean layout, rename the old tab (e.g. `Signups-old`) and the script will create a fresh one.
 
+### Booked slots (automatic)
+The grid asks the Sheet which slots are taken and shows them as Full. One person per slot.
+- Every row holds its slots, including `pending` rows where someone never finished paying.
+- **To free a slot:** type `cancelled` or `refunded` in that row's `paid` column, or delete the row. The page picks it up within a minute.
+- **To block a slot yourself** (holiday, trainer away): add a row with only `slotKeys` filled in, e.g. `2:Wed 18:15` (week 2, Wednesday 18:15). Separate several with commas.
+- If two people send the same slot at the same moment, the second row gets `CLASH` in `paid` and does not hold the slot. Contact that person.
+- `slotPlain` is the easy-to-read, sortable version (e.g. `Wed 18:15+19:00 weekly`).
+
 ### 2. Stripe
 1. Product "Pilot deposit", one-time price **€25**.
 2. Payment Link for that product:
@@ -42,7 +50,7 @@ The Sheet's `paid` column starts as `pending`. Mark it `yes` after checking the 
 ### 3. Text
 - English text is in `index.html` (inside the template) and `assets/js/page.js` (booking grid labels).
 - Dutch is in `assets/js/i18n.js`. Find the English line, change the Dutch next to it. Keep `{{holes}}` as they are.
-- Prices (€100 Single, €200 Double) and the "Full" slots are in `assets/js/page.js` (search `const price` and `baseFull`).
+- Prices (€100 Single, €200 Double) and the seven sample "Full" slots from the design are in `assets/js/page.js` (search `const price` and `baseFull`).
 
 ### Useful links
 - Dutch: `https://nopogo.github.io/?lang=nl` (the NL/EN button remembers the choice)

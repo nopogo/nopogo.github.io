@@ -73,5 +73,20 @@
     return 'BRV-' + s;
   }
 
-  window.BRAVR_BOOKING = { submit: submit, restore: restore, newRef: newRef };
+  // Asks the sheet which slots are already booked. Resolves to { '1:Wed 18:15': 1, ... }
+  // (week number : day time), or null if the sheet can't be reached (the page then carries on as before).
+  function taken() {
+    var url = (CFG.APPS_SCRIPT_URL || '').trim();
+    if (!url) return Promise.resolve(null);
+    return fetch(url + (url.indexOf('?') < 0 ? '?' : '&') + 't=' + Date.now())
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (!d || !Array.isArray(d.taken)) return null;
+        var m = {}; d.taken.forEach(function (k) { m[String(k)] = 1; });
+        return m;
+      })
+      .catch(function () { return null; });
+  }
+
+  window.BRAVR_BOOKING = { submit: submit, restore: restore, newRef: newRef, taken: taken };
 })();
