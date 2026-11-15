@@ -4,17 +4,15 @@
 window.BRAVR_CONFIG = {
   // Google Apps Script web-app URL (see README, step 1).
   // Leave empty to run in "demo mode" (submissions are logged to the console only).
-  APPS_SCRIPT_URL: "https://script.google.com/macros/s/AKfycbxA7ytyuBpNJNTDrDvuRti6LWXZnHUmXfrGMSEBCfR6AichJpVNcCMn6CzR8jqZOZj8Kg/exec",
+  APPS_SCRIPT_URL: "https://script.google.com/macros/s/AKfycbyk948VEH6PJ44OPuQcWyptJBwD7NM_mXJG8-2pcJF_DzU-mrTa9FQo2A0r5zd7p3XAfA/exec",
 
   // Stripe Payment Link for the deposit (see README, step 2).
   // Use a test-mode link (https://buy.stripe.com/test_...) while testing.
-  STRIPE_PAYMENT_LINK: "https://buy.stripe.com/test_4gM7sM6G75Bxc2b6YW2Ji00",
+  // Leave empty for demo mode: bookings still go to the sheet, then the on-page confirmation shows.
+  // In Stripe, set "After payment" to redirect to https://nopogo.github.io/?paid=1
+  STRIPE_PAYMENT_LINK: "",
 
-  // Display values only — the real amount charged is set in Stripe.
-  DEPOSIT_AMOUNT: "€25",
-  COURSE_PRICE: "€200",
-
-  // Shown on the page in both languages.
-  START_DATES: { en: "Spring 2027", nl: "Voorjaar 2027" },
-  LOCATION: { en: "Central Amsterdam (exact venue TBA)", nl: "Amsterdam-Centrum (locatie volgt)" }
+  // For reference only. The page itself shows €25 deposit, €100 Single, €200 Double
+  // (set in assets/js/page.js). The amount actually charged is set in Stripe.
+  DEPOSIT_AMOUNT: "€25"
 };

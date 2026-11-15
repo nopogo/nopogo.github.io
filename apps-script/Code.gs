@@ -1,5 +1,5 @@
 /**
- * BRAVR signup → Google Sheet
+ * BRAVR pilot booking → Google Sheet
  *
  * Setup:
  *  1. Create a Google Sheet. Extensions → Apps Script. Replace Code.gs with this file.
@@ -16,10 +16,11 @@ const SHEET_NAME = 'Signups';
 // Column order in the sheet. New keys sent by the form are appended automatically.
 const COLUMNS = [
   'submittedAt', 'signupId', 'intent', 'paid',
-  'firstName', 'lastName', 'email', 'phone', 'ageRange', 'postcode',
-  'occupation', 'occupationOther', 'stressSources', 'vrExperience', 'goal',
-  'schedule', 'earliestStart', 'source', 'discountCode',
-  'consentPrivacy', 'consentHealth', 'consentNews',
+  'name', 'email', 'phone', 'train',
+  'length', 'pattern', 'slots', 'firstSession', 'startWeek',
+  'price', 'deposit', 'dueAtFirstSession', 'payMethod',
+  'codeType', 'discountCode', 'memberCode', 'communityCode',
+  'health', 'meds', 'consent',
   'lang', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term',
   'referrer', 'page'
 ];
@@ -51,7 +52,7 @@ function doPost(e) {
 
     // Optional: uncomment to get an email for every signup.
     // MailApp.sendEmail(Session.getEffectiveUser().getEmail(),
-    //   'New BRAVR signup: ' + data.firstName + ' ' + data.lastName + ' (' + data.intent + ')',
+    //   'New BRAVR booking: ' + data.name + ' (' + data.slots + ')',
     //   JSON.stringify(data, null, 2));
     return json({ ok: true });
   } catch (err) {
