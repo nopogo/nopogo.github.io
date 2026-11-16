@@ -70,5 +70,10 @@ header a[href="#book"]{white-space:nowrap}
 html[lang="nl"] .qline{--qk:37.3}
 @media (max-width: 760px){.qline{white-space:normal;font-size:22px;line-height:1.3;text-wrap:balance}}
 @media (max-width: 931px){.bk-top,.bk-main{display:contents!important}.bk{gap:24px!important}.bk-top>*,.bk-main>*{flex:none!important}.bk>:not(.bk-top):not(.bk-main){order:5}.bk-head{order:1;margin-bottom:calc(var(--s-intro) - 24px)}.bk-grid{order:2}.bk-chips{order:3;margin-top:calc(var(--s-intro) - 24px)}.bk-sum{order:4;position:static!important}}
+@keyframes scrDot{0%{transform:translateY(0);opacity:0}25%{opacity:1}70%{opacity:1}100%{transform:translateY(9px);opacity:0}}
+@keyframes scrChev{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(3px);opacity:1}}
+.scr-dot{animation:scrDot 1.6s cubic-bezier(.2,.8,.2,1) infinite}.scr-chev{animation:scrChev 1.6s ease-in-out infinite}
+@media (prefers-reduced-motion: reduce){.scr-dot,.scr-chev{animation:none}}
+.wk-short{display:none}@media (max-width: 600px){.wk-long{display:none}.wk-short{display:inline}.wk-tabs{flex-wrap:nowrap!important;gap:6px!important}.wk-tabs>button{flex:1 1 0;min-width:0;justify-content:center;gap:6px!important;padding:8px 6px!important}}
 .float{box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 28px 70px -18px rgba(0,0,0,.65),0 0 0 1px rgba(4,193,226,.07)}
 .hero-pin{position:sticky;top:96px;align-self:flex-start}@media (max-width: 1000px){.hero-pin{position:static}}

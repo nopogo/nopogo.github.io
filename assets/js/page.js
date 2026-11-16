@@ -288,7 +288,7 @@ const patternOpts = [['same', T('Same slot each week')], ['each', T('Pick each w
 const weekTabs = [1, 2, 3, 4].map((w) => {
 const on = week === w;
 return {
-label: T('Week') + ' ' + w, pressed: on, pick: () => set({ week: w }),
+label: T('Week') + ' ' + w, short: T('Wk') + ' ' + w, pressed: on, pick: () => set({ week: w }),
 style: 'display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 8px 14px; border-radius: 10px; font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; background: transparent; ' + (on ? 'border: 1px solid #F6FBFF; color: #F6FBFF;' : 'border: 1px solid #23415E; color: #C9D6E2;'),
 dot: 'width: 6px; height: 6px; border-radius: 999px; background: ' + (selFor(w) ? '#04C1E2' : 'transparent')
 };
@@ -477,6 +477,7 @@ return {
 ...hsV,
 graphScore: S.graphScore ?? (this.props.graphFinal ? (this.props.scoreTarget ?? 65) : 1),
 scoreLineStyle: 'position: absolute; left: 0; width: 100%; height: 0; top: ' + ((806 - (S.graphScore ?? (this.props.graphFinal ? (this.props.scoreTarget ?? 65) : 1)) * 7.43) / 8.4).toFixed(3) + '%',
+scrollHint: 'flex: none; display: flex; align-items: center; gap: 8px; transition: opacity 500ms ease; opacity: ' + (gStage < 2 ? 1 : 0) + ';',
 calloutStyle: 'position: relative; display: flex; align-items: center; gap: 14px; margin-top: 6px; padding: 16px 22px; border-radius: 14px; background: #04C1E2; box-shadow: 0 10px 30px rgba(4, 193, 226, 0.28); ' + ease + ' ' + shown('12px'),
 gradeStyle0: gradeStyle(0), gradeStyle1: gradeStyle(1), gradeStyle2: gradeStyle(2), gradeStyle3: gradeStyle(3), gradeStyle4: gradeStyle(4),
 gImg0: 'position: absolute; inset: 0; width: 100%; height: 100%; display: block; transition: opacity 500ms ease; opacity: ' + (gStage === 0 ? 1 : 0), gImg1: 'position: absolute; inset: 0; width: 100%; height: 100%; display: block; transition: opacity 500ms ease; opacity: ' + (gStage === 1 ? 1 : 0), gImg2: 'position: absolute; inset: 0; width: 100%; height: 100%; display: block; transition: opacity 500ms ease; opacity: ' + (gStage === 2 ? 1 : 0),

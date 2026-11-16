@@ -212,6 +212,8 @@
     'Same slot each week': 'Elke week dezelfde tijd',
     'Pick each week': 'Per week kiezen',
     'Week': 'Week',
+    'Wk': 'Wk',
+    'Scroll': 'Scroll',
     'Full': 'Vol',
     'Single only': 'Alleen enkel',
     'Selected': 'Gekozen',
@@ -315,12 +317,17 @@
     }
   }
 
+  // Reloads the page in the other language and keeps the visitor where they were.
+  // (Assigning location.href would only jump to an anchor like #book if the URL has one, without reloading.)
   function setLang(l) {
     if (l !== 'nl' && l !== 'en') return;
     try { localStorage.setItem('bravr-lang', l); } catch (e) {}
-    var u = new URL(location.href);
-    u.searchParams.delete('lang');
-    location.href = u.toString();
+    try {
+      var u = new URL(location.href);
+      u.searchParams.delete('lang'); u.hash = '';
+      history.replaceState(null, '', u.pathname + u.search);
+    } catch (e) {}
+    location.reload();
   }
 
   document.documentElement.lang = lang;
