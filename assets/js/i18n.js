@@ -28,7 +28,7 @@
     // ---- hero
     'CHAOS IS INEVITABLE': 'CHAOS IS ONVERMIJDELIJK',
     'Panic is optional': 'Paniek is een keuze',
-    "Try a four-week clinic that trains your body's stress response the way a gym trains muscle. Amsterdam, January.": 'Probeer een clinic van vier weken die de stressreactie van je lichaam traint zoals een gym je spieren traint. Amsterdam, januari.',
+    "A four-week clinic that trains your body's stress response the way a gym trains muscle.": 'Een clinic van vier weken die de stressreactie van je lichaam traint zoals een gym je spieren traint.',
     'Watch the teaser · 1:02': 'Bekijk de teaser · 1:02',
     'High performers know...': 'Toppresteerders weten het...',
     'The last shot': 'Het laatste schot',
@@ -98,12 +98,11 @@
 
     // ---- testimonials
     'Some people are collected under pressure,': 'Sommige mensen blijven kalm onder druk,',
-    'most feel a hurricane in their chest': 'de meesten voelen een orkaan in hun borst',
-    'threatening to overwhelm them.': 'die hen dreigt te overspoelen.',
+    'most feel a hurricane in their chest threatening to overwhelm them.': 'de meesten voelen een orkaan in hun borst die hen dreigt te overspoelen.',
     'Which do you want to be?': 'Wie wil jij zijn?',
-    'UK police pilot • 2026': 'Pilot Britse politie • 2026',
+    'UK Police · 2026': 'Britse politie · 2026',
     'Tested where pressure is the job': 'Getest waar druk bij het werk hoort',
-    '“If it wasn\'t for VR, I wouldn\'t practise the breathing skill.”': '“Zonder VR zou ik de ademhalingstechniek niet oefenen.”',
+    '“If it wasn\'t for [BRAVR], I wouldn\'t practise the breathing skill.”': '“Zonder [BRAVR] zou ik de ademhalingstechniek niet oefenen.”',
     'Participant, UK police pilot, 2026': 'Deelnemer, pilot Britse politie, 2026',
     '“I regulate in preparation, like before assessments.”': '“Ik reguleer ter voorbereiding, bijvoorbeeld vóór beoordelingen.”',
     '“I was able to step back, look around, understand the broader team\'s positioning, and take decisive action.”': '“Ik kon een stap terug doen, om me heen kijken, de positie van het hele team overzien en daadkrachtig handelen.”',

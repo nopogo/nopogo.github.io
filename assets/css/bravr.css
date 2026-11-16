@@ -50,7 +50,7 @@ h1,h2,h3,p{margin:0}
 .tx-chk::before{inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:linear-gradient(to bottom,#000,transparent 55%);mask-image:linear-gradient(to bottom,#000,transparent 55%)}
 .tx-faq{background:var(--faq)}
 .tx-faq::before{left:0;right:0;top:0;height:220px;background:linear-gradient(to bottom,var(--chk),transparent)}
-.hiw-stage{aspect-ratio:16/17}@media (max-width: 1000px){.hiw-stage{aspect-ratio:4/3.4}}
+.hiw-stage{aspect-ratio:8/9;width:100%}
 @keyframes hgVigA{0%{opacity:0;transform:scale(1.5)}50%{opacity:0.85;transform:scale(1.05)}100%{opacity:0;transform:scale(1.5)}}@keyframes hgVigB{0%{opacity:0;transform:scale(1.5)}50%{opacity:0.85;transform:scale(1.05)}100%{opacity:0;transform:scale(1.5)}}
 @keyframes hgProgA{from{transform:scaleX(0)}to{transform:scaleX(1)}}@keyframes hgProgB{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 @media (max-width: 600px){.hg-tabs > button{font-size:11px!important;letter-spacing:0.04em!important;padding:10px 10px!important}}
@@ -66,5 +66,8 @@ h1,h2,h3,p{margin:0}
 .lang button[aria-pressed="true"]{background:rgba(246,251,255,.16);color:#F6FBFF}
 header a[href="#book"]{white-space:nowrap}
 @media (max-width: 480px){.lang button{min-width:34px;padding:0 6px}header a[href="#book"]{padding:10px 14px!important;font-size:14px!important}.hd-brand img{height:26px!important}}
+.qline{--qk:34.5;white-space:nowrap;font-size:calc(min(100vw - 48px, 1200px) / var(--qk));line-height:1.35;letter-spacing:.01em}
+html[lang="nl"] .qline{--qk:37.3}
+@media (max-width: 760px){.qline{white-space:normal;font-size:22px;line-height:1.3;text-wrap:balance}}
 .float{box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 28px 70px -18px rgba(0,0,0,.65),0 0 0 1px rgba(4,193,226,.07)}
 .hero-pin{position:sticky;top:96px;align-self:flex-start}@media (max-width: 1000px){.hero-pin{position:static}}

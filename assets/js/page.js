@@ -90,7 +90,26 @@ window.addEventListener('scroll', this._onGraphScroll, { passive: true, capture:
 window.addEventListener('resize', this._onGraphScroll);
 this.tickGraph();
 }
+_openVideo() {
+let box = null;
+if ((window.innerHeight || 0) > 1600) {
+// design canvas: the board itself does not scroll, so place the player over the part of the board on screen
+let a = -1, b = -1; for (let i = 0; i < 300; i++) { if (this._pgVis[i]) { if (a < 0) a = i; b = i; } }
+const holder = this._pgs && this._pgs[0] && this._pgs[0].parentNode;
+if (a >= 0 && holder) { const H = holder.offsetHeight; box = { top: Math.round(a * H / 300), height: Math.max(360, Math.round((b - a + 1) * H / 300)) }; }
+} else { this._bodyOv = document.body.style.overflow; document.body.style.overflow = 'hidden'; }
+this._onEsc = (e) => { if (e.key === 'Escape') this._closeVideo(); };
+document.addEventListener('keydown', this._onEsc);
+this.setState({ videoOpen: true, videoBox: box });
+}
+_closeVideo() {
+if (this.video) { try { this.video.pause(); } catch (e) {} }
+if (this._bodyOv !== undefined) { document.body.style.overflow = this._bodyOv; this._bodyOv = undefined; }
+if (this._onEsc) { document.removeEventListener('keydown', this._onEsc); this._onEsc = null; }
+this.setState({ videoOpen: false });
+}
 componentWillUnmount() {
+this._closeVideo && this._onEsc && document.removeEventListener('keydown', this._onEsc);
 window.removeEventListener('scroll', this._onPin);
 if (this._pio) this._pio.disconnect();
 clearInterval(this._qTimer);
@@ -279,7 +298,7 @@ const headers = isSame ? days.map(DS) : days.map((d, i) => DS(d) + ' ' + dateFor
 const cellBase = 'width: 100%; min-width: 0; min-height: 44px; padding: 4px 6px; border-radius: 10px; font: inherit; font-size: 15px; font-weight: 600; line-height: 1.2; box-sizing: border-box; overflow: hidden; text-overflow: ellipsis; overflow-wrap: normal; ';
 const curSel = selFor(week);
 const rows = times.map((t) => ({
-time: t,
+time: t, divider: t === '12:30' || t === '17:30',
 cells: days.map((d) => {
 const key = d + ' ' + t;
 const closed = isClosed(d, t);
@@ -396,7 +415,7 @@ else if (qOn && i === S.qLast) pos = 'opacity: 0; transform: translateX(-60px); 
 else pos = 'opacity: 0; transform: translateX(60px); pointer-events: none; visibility: hidden;';
 return 'grid-area: 1 / 1; ' + t + pos;
 };
-const qBeat = (i) => "font-size: 32px; line-height: 1.25; letter-spacing: 1px; color: #F6FBFF; text-wrap: balance; margin: 0; transform-origin: 50% 60%; " + (rvAll ? 'opacity: 0.55;' : 'transition: opacity 1200ms ease ' + (i * 600) + 'ms, transform 1500ms cubic-bezier(0.16, 1, 0.3, 1) ' + (i * 600) + 'ms; ' + (rvSet[3] ? 'opacity: 0.55; transform: none;' : 'opacity: 0; transform: translateY(48px) scale(1.4);'));
+const qBeat = (i) => "color: #F6FBFF; margin: 0; transform-origin: 50% 60%; " + (rvAll ? 'opacity: 0.55;' : 'transition: opacity 1200ms ease ' + (i * 600) + 'ms, transform 1500ms cubic-bezier(0.16, 1, 0.3, 1) ' + (i * 600) + 'ms; ' + (rvSet[3] ? 'opacity: 0.55; transform: none;' : 'opacity: 0; transform: translateY(48px) scale(1.4);'));
 const qPhotoPos = [[1.06, 0, 0], [1.14, -4, 2], [1.1, 3, -2]];
 const qp = qPhotoPos[qOn ? qActive : 0];
 const qStatic = qPrev > 0 || hiwReduce;
@@ -416,29 +435,15 @@ const ease = 'transition: opacity 600ms cubic-bezier(.2,.8,.2,1), transform 600m
 const tagBase = 'position: absolute; padding: 0.5cqw 1.1cqw; border-radius: 0.5cqw; font-family: \'Space Grotesk\', sans-serif; font-size: max(11px, 1.7cqw); line-height: 1.2; white-space: nowrap; ' + ease;
 const shown = (dy) => gReveal ? 'opacity: 1; transform: translateY(0);' : 'opacity: 0; transform: translateY(' + dy + ');';
 const boxBase = 'position: absolute; box-sizing: border-box; ' + ease + (gReveal ? ' opacity: 1;' : ' opacity: 0;');
-const hs = S.hiwStep ?? 0;
 const hsEase = 'cubic-bezier(0.16, 1, 0.3, 1)';
-const hsPick = (i) => () => { if (((this.state && this.state.hiwStep) ?? 0) !== i) this.setState({ hiwStep: i }); };
-const hsCaps = [T('Heart rate variability tells you, second by second, how stressed your body actually is.'), T('Actual view inside the headset. The steadier you are, the clearer the world.'), T('Using specific regulation techniques, your stress response gets better with practise.')];
-const hsNames = [T('Stage 1: gear up'), T('Stage 2: feel the pressure'), T('Stage 3: take control')];
 const hsV = {};
 [0, 1, 2].forEach((i) => {
-const on = i === hs, done = i < hs;
-hsV['hsPick' + i] = hsPick(i);
-hsV['hsExp' + i] = on ? 'true' : 'false';
 hsV['rvSt' + i] = rv(1, 3 + i);
-hsV['hsRow' + i] = 'position: relative; width: 100%; display: flex; gap: 18px; align-items: flex-start; text-align: left; font: inherit; color: inherit; cursor: pointer; padding: 14px 16px 14px 14px; border-radius: 14px; border: 1px solid ' + (on ? 'rgba(4,193,226,.28)' : 'transparent') + '; background: ' + (on ? 'rgba(4,193,226,.06)' : 'transparent') + '; transition: background 300ms ease, border-color 300ms ease;';
-hsV['hsNum' + i] = 'flex: none; position: relative; z-index: 1; width: 40px; height: 40px; border-radius: 999px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; font-weight: 600; transition: background 300ms ease, color 300ms ease, border-color 300ms ease, box-shadow 300ms ease; ' + (on ? 'background: #04C1E2; color: #03111E; border: 1px solid #04C1E2; box-shadow: 0 0 0 6px rgba(4,193,226,.12);' : done ? 'background: transparent; color: #04C1E2; border: 1px solid #04C1E2;' : 'background: transparent; color: #04C1E2; border: 1px solid rgba(4,193,226,.45);');
-hsV['hsTitle' + i] = 'font-weight: 700; font-size: 19px; line-height: 1.35; transition: color 300ms ease; color: ' + (on ? '#F6FBFF' : '#A9BCCD') + ';';
-hsV['hsBody' + i] = 'display: grid; grid-template-rows: ' + (on ? '1fr' : '0fr') + '; opacity: ' + (on ? 1 : 0) + '; transition: grid-template-rows 500ms ' + hsEase + ', opacity 400ms ease ' + (on ? '120ms' : '0ms') + ';';
-hsV['hsSeg' + i] = 'position: absolute; inset: 0; background: #04C1E2; transform-origin: top; transition: transform 500ms ' + hsEase + '; transform: scaleY(' + (done ? 1 : 0) + ');';
-hsV['hsBar' + i] = 'flex: 1 1 0; height: 3px; border-radius: 3px; transition: background 400ms ease; background: ' + (i <= hs ? '#04C1E2' : '#17304A') + ';';
-hsV['hm' + i] = 'position: absolute; inset: 0; transition: opacity 500ms ease, transform 700ms ' + hsEase + '; ' + (on ? 'opacity: 1; transform: none; pointer-events: auto;' : 'opacity: 0; transform: translateY(' + (i > hs ? 24 : -24) + 'px) scale(0.98); pointer-events: none;');
+const d = 500 + i * 450;
+hsV['hsNum' + i] = 'position: relative; z-index: 1; width: 40px; height: 40px; border-radius: 999px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; font-weight: 600; ' + (hiwReduce ? '' : 'transition: background 400ms ease ' + d + 'ms, color 400ms ease ' + d + 'ms, border-color 400ms ease ' + d + 'ms, box-shadow 400ms ease ' + d + 'ms; ') + (hiwOn ? 'background: #04C1E2; color: #03111E; border: 1px solid #04C1E2; box-shadow: 0 0 0 6px rgba(4,193,226,.12);' : 'background: transparent; color: #04C1E2; border: 1px solid rgba(4,193,226,.45);');
+hsV['hsSeg' + i] = 'position: absolute; inset: 0; background: #04C1E2; transform-origin: top; ' + (hiwReduce ? '' : 'transition: transform 600ms ' + hsEase + ' ' + (d + 250) + 'ms; ') + 'transform: scaleY(' + (hiwOn ? 1 : 0) + ');';
 });
-hsV.rvStage = rv(1, 4, 'flex: 1 1 480px; min-width: 0; display: flex; flex-direction: column; justify-content: flex-end; ');
-hsV.hsLabel = T('Stage') + ' 0' + (hs + 1) + ' / 03';
-hsV.hsName = hsNames[hs];
-hsV.hsCap = hsCaps[hs];
+hsV.rvStage = rv(1, 4, 'flex: 1 1 480px; min-width: 0; display: flex; flex-direction: column; justify-content: center; ');
 const hgN = S.heroN || 0, hgI = S.heroIdx || 0, hgPause = !!S.heroPause;
 const hgReduce = hiwReduce;
 const hgV = {};
@@ -541,8 +546,9 @@ falBoxStyle: boxBase + ' left: 52.4%; top: 32.1%; width: 9.5%; height: 37.5%; ba
 recTagStyle: tagBase + ' left: 31.5%; top: 2.2%; background: #04C1E2; color: #03111E; ' + shown('-1.2cqw'),
 falTagStyle: tagBase + ' left: 51%; top: 70.6%; background: #F86C73; color: #03111E; ' + shown('1.2cqw'),
 videoOpen: !!S.videoOpen,
-openVideo: () => this.setState({ videoOpen: true }),
-closeVideo: () => { if (this.video) { try { this.video.pause(); } catch (e) {} } this.setState({ videoOpen: false }); },
+openVideo: () => this._openVideo(),
+videoWrap: (S.videoBox ? 'position: absolute; left: 0; right: 0; top: ' + S.videoBox.top + 'px; height: ' + S.videoBox.height + 'px; ' : 'position: fixed; inset: 0; ') + 'z-index: 1000; background: rgba(1, 8, 15, 0.88); display: flex; align-items: center; justify-content: center; padding: 24px; box-sizing: border-box',
+closeVideo: () => this._closeVideo(),
 stopClick: (e) => { if (e && e.stopPropagation) e.stopPropagation(); },
 setVideo: (el) => { this.video = el; },
 lengthOpts, patternOpts, weekTabs, headers, rows,
