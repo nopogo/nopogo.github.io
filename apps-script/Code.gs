@@ -12,6 +12,8 @@
  */
 
 const SHEET_NAME = 'Signups';
+const CONTACT_SHEET = 'Contact';   // messages from the Contact page land here
+const CONTACT_COLUMNS = ['submittedAt', 'name', 'email', 'organisation', 'reason', 'message', 'consent', 'lang', 'page'];
 
 // A row holds its slots unless its "paid" cell says one of these (any capitals).
 // To free a slot: type cancelled (or refunded) in the paid column, or delete the row.
@@ -35,6 +37,12 @@ function doPost(e) {
   try {
     const data = JSON.parse(e.postData.contents);
     if (data.website) return json({ ok: true }); // honeypot
+
+    if (data.intent === 'contact') {
+      const cs = getSheet_(CONTACT_SHEET, CONTACT_COLUMNS);
+      cs.appendRow(CONTACT_COLUMNS.map(h => data[h] == null ? '' : String(data[h]).slice(0, 5000)));
+      return json({ ok: true });
+    }
 
     const sheet = getSheet_();
     let headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
@@ -96,12 +104,13 @@ function takenSlots_(sheet) {
   return Object.keys(out);
 }
 
-function getSheet_() {
+function getSheet_(name, cols) {
+  name = name || SHEET_NAME; cols = cols || COLUMNS;
   const ss = SpreadsheetApp.getActiveSpreadsheet();
-  let sheet = ss.getSheetByName(SHEET_NAME);
+  let sheet = ss.getSheetByName(name);
   if (!sheet) {
-    sheet = ss.insertSheet(SHEET_NAME);
-    sheet.getRange(1, 1, 1, COLUMNS.length).setValues([COLUMNS]).setFontWeight('bold');
+    sheet = ss.insertSheet(name);
+    sheet.getRange(1, 1, 1, cols.length).setValues([cols]).setFontWeight('bold');
     sheet.setFrozenRows(1);
   }
   return sheet;

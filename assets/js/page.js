@@ -386,7 +386,7 @@ price: '€' + price, deposit: '€25', dueAtFirstSession: '€' + (price - 25),
 };
 payload.slotKeys = myKeys.join(', ');
 payload.slotPlain = isSame ? sameSel.d + ' ' + sameSel.ts.join('+') + ' weekly' : [1, 2, 3, 4].map((w) => { const k = selFor(w); return 'W' + w + ' ' + k.d + ' ' + k.ts.join('+'); }).join(' | ');
-const ui = { len, pattern, same: S.same || null, picks, week, f: Object.assign({}, F, { website: '' }), ref, confirmed: true, mine: myKeys };
+const ui = { len, pattern, same: S.same || null, picks, week, f: Object.assign({}, F, { website: '' }), ref, confirmed: true, mine: myKeys, lines: bookingLines.map((b) => ({ label: b.label, value: b.value })), firstText, due: price - 25, savedAt: Date.now() };
 this._sending = true;
 this.setState({ sending: true, sendErr: false, tried: false, clashErr: false });
 // last look at the sheet: has someone taken one of these slots in the meantime?

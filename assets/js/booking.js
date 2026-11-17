@@ -88,5 +88,13 @@
       .catch(function () { return null; });
   }
 
-  window.BRAVR_BOOKING = { submit: submit, restore: restore, newRef: newRef, taken: taken };
+  // Plain send for other forms (the Contact page). Resolves once the sheet has been asked; demo mode just logs.
+  function send(payload) {
+    var p = Object.assign({ lang: (window.I18N && window.I18N.lang) || 'en', page: location.origin + location.pathname, submittedAt: new Date().toISOString() }, payload);
+    var url = (CFG.APPS_SCRIPT_URL || '').trim();
+    if (!url) { console.info('[BRAVR demo] no APPS_SCRIPT_URL set, message not sent:', p); return Promise.resolve(); }
+    return fetch(url, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(p) });
+  }
+
+  window.BRAVR_BOOKING = { submit: submit, restore: restore, newRef: newRef, taken: taken, send: send };
 })();
