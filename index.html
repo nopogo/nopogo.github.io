@@ -217,22 +217,22 @@
 <sc-for list="{{weekTabs}}" as="tab" hint-placeholder-count="4"><button type="button" aria-label="{{tab.label}}" aria-pressed="{{tab.pressed}}" onClick="{{tab.pick}}" style="{{tab.style}}"><span><span class="wk-long">{{tab.label}}</span><span class="wk-short">{{tab.short}}</span></span><span aria-hidden="true" style="{{tab.dot}}"></span></button></sc-for>
 </div>
 </sc-if>
-<div style="overflow-x: auto; margin: 4px -4px 0; padding: 0 4px 4px">
+<div style="overflow-x: auto; margin: 4px 0 0; padding: 0 0 4px">
 <div style="min-width: 500px; display: flex; flex-direction: column; gap: 8px">
 <div style="display: grid; grid-template-columns: 56px repeat(6, minmax(0, 1fr)); gap: 8px; align-items: end">
-<span style="position: sticky; left: 0; z-index: 1; background: #0A1C2C; align-self: stretch; display: flex; align-items: center;"></span>
+<span style="position: sticky; left: 0; z-index: 2; background: #0A1C2C; box-shadow: 8px 0 0 #0A1C2C; align-self: stretch; display: flex; align-items: center;"></span>
 <sc-for list="{{headers}}" as="h" hint-placeholder-count="6"><span style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: #A9BCCD; letter-spacing: 0.06em; text-transform: none; font-size: 13px; text-align: center; color: #C9D6E2">{{h}}</span></sc-for>
 </div>
 <sc-for list="{{rows}}" as="row" hint-placeholder-count="6">
 <sc-if value="{{row.divider}}"><div aria-hidden="true" style="height: 1px; margin: 6px 0; background: rgba(246, 251, 255, 0.16)"></div></sc-if>
 <div style="display: grid; grid-template-columns: 56px repeat(6, minmax(0, 1fr)); gap: 8px; align-items: center">
-<span style="position: sticky; left: 0; z-index: 1; background: #0A1C2C; align-self: stretch; display: flex; align-items: center; font-size: 14px; color: #C9D6E2; font-variant-numeric: tabular-nums">{{row.time}}</span>
+<span style="position: sticky; left: 0; z-index: 2; background: #0A1C2C; box-shadow: 8px 0 0 #0A1C2C; align-self: stretch; display: flex; align-items: center; font-size: 14px; color: #C9D6E2; font-variant-numeric: tabular-nums">{{row.time}}</span>
 <sc-for list="{{row.cells}}" as="cell" hint-placeholder-count="6"><button type="button" disabled="{{cell.disabled}}" aria-pressed="{{cell.selected}}" aria-label="{{cell.aria}}" onClick="{{cell.pick}}" style="{{cell.style}}">{{cell.label}}</button></sc-for>
 </div>
 </sc-for>
 </div>
 </div>
-<div class="cap-lines"><p>Dashed slots are full.</p><p>A Double books two slots back to back.</p><p>"Single only": the next slot is taken.</p><p>Times shown are Amsterdam time.</p><p>On a phone, swipe the grid for more days.</p></div>
+<div class="cap-cols"><ul><li>Dashed slots are reserved.</li><li>Double workouts fill two slots back-to-back.</li></ul><ul><li>“Single only” – only a single workout can be selected.</li><li>Times shown are Amsterdam time.</li></ul></div>
 </div>
 </div>
 </div>

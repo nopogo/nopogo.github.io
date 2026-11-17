@@ -74,7 +74,11 @@ html[lang="nl"] .qline{--qk:37.3}
 .scr-dot{animation:scrDot 1.6s cubic-bezier(.2,.8,.2,1) infinite}.scr-chev{animation:scrChev 1.6s ease-in-out infinite}
 @media (prefers-reduced-motion: reduce){.scr-dot,.scr-chev{animation:none}}
 .wk-short{display:none}@media (max-width: 600px){.wk-long{display:none}.wk-short{display:inline}.wk-tabs{flex-wrap:nowrap!important;gap:6px!important}.wk-tabs>button{flex:1 1 0;min-width:0;justify-content:center;gap:6px!important;padding:8px 6px!important}}
-.cap-lines p{font-size:min(13px, 3.1vw);color:#A9BCCD;white-space:nowrap;line-height:1.6}
+.cap-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 32px;padding-top:4px}
+.cap-cols ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.cap-cols li{position:relative;padding-left:18px;font-size:13px;line-height:1.5;color:#A9BCCD}
+.cap-cols li::before{content:"";position:absolute;left:2px;top:.55em;width:6px;height:6px;border-radius:999px;background:#04C1E2;box-shadow:0 0 0 3px rgba(4,193,226,.15)}
+@media (max-width: 640px){.cap-cols{grid-template-columns:minmax(0,1fr)}}
 .wo-card{transition:border-color 200ms ease, background 200ms ease, transform 200ms ease}.wo-card:hover{transform:translateY(-2px)}
 @media (prefers-reduced-motion: reduce){.wo-card:hover{transform:none}}
 .float{box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 28px 70px -18px rgba(0,0,0,.65),0 0 0 1px rgba(4,193,226,.07)}
