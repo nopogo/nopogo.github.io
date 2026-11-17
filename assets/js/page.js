@@ -14,7 +14,9 @@ const back = window.BRAVR_BOOKING && window.BRAVR_BOOKING.restore();
 this._loadTaken = () => { if (document.hidden || this._sending) return; window.BRAVR_BOOKING.taken().then((t) => { if (t) this.setState({ taken: t }); }); };
 this._loadTaken(); this._takenTimer = setInterval(this._loadTaken, 60000);
 if (back) { this.setState(back); setTimeout(() => { const el = document.getElementById('book'); if (el) el.scrollIntoView(); }, 60); }
-this._onPin = () => { if (this._canvasMode) return; const on = (window.scrollY || 0) > 140; if (on !== !!(this.state && this.state.pinCta)) this.setState({ pinCta: on }); };
+// the pinned CTA steps aside while the visitor is in the booking steps (from #book to the end of #checkout)
+this._bookHide = (top, vh) => { const b = document.getElementById('book'), k = document.getElementById('checkout'); if (!b || !k) return false; const sy = window.scrollY || 0; const y0 = b.getBoundingClientRect().top + sy, y1 = k.getBoundingClientRect().bottom + sy; return top + vh * 0.5 >= y0 && top < y1 - vh * 0.3; };
+this._onPin = () => { if (this._canvasMode) return; const y = window.scrollY || 0; const on = y > 140; const hide = on && this._bookHide(y, window.innerHeight || 800); const c = this.state || {}; if (on !== !!c.pinCta || hide !== !!c.ctaHide) this.setState({ pinCta: on, ctaHide: hide }); };
 window.addEventListener('scroll', this._onPin, { passive: true });
 this._pgVis = [];
 this._pio = new IntersectionObserver((entries) => {
@@ -25,9 +27,10 @@ let first = -1; for (let i = 0; i < 300; i++) { if (this._pgVis[i]) { first = i;
 if (first < 0) return;
 const top = Math.round(first * (document.documentElement.scrollHeight / 300));
 const on = first > 0 && top > 140; const c = this.state || {};
-if (!canvas) { if (on !== !!c.pinCta || c.canvasTop != null) this.setState({ pinCta: on, canvasTop: null }); return; }
+if (!canvas) { const y = window.scrollY || 0; const hide = y > 140 && this._bookHide(y, window.innerHeight || 800); if (on !== !!c.pinCta || c.canvasTop != null || hide !== !!c.ctaHide) this.setState({ pinCta: on, canvasTop: null, ctaHide: hide }); return; }
 const hdr = document.querySelector('header'); const adj = top - (hdr ? hdr.offsetTop : 0);
-if (on !== !!c.pinCta || (on && adj !== c.canvasTop)) this.setState({ pinCta: on, canvasTop: on ? adj : null });
+const hide = on && this._bookHide(top, 900);
+if (on !== !!c.pinCta || (on && adj !== c.canvasTop) || hide !== !!c.ctaHide) this.setState({ pinCta: on, canvasTop: on ? adj : null, ctaHide: hide });
 }, { threshold: [0] });
 (this._pgs || []).forEach((el) => { if (el) this._pio.observe(el); });
 this._qEl = 0;
@@ -282,6 +285,12 @@ const tLabel = (sl) => sl.ts.join(' & ');
 const pill = (on) => 'flex: 1 1 auto; text-align: center; border: 0; border-radius: 999px; padding: 10px 18px; min-height: 40px; font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; ' + (on ? 'background: #04C1E2; color: #03111E;' : 'background: transparent; color: #F6FBFF;');
 const set = (o) => this.setState(o);
 
+const workoutOpts = [['single', T('Single'), '30 min', T('One focused workout per session.'), 100], ['double', T('Double'), '60 min', T('Two workouts per session, plus a data review with your coach.'), 200]].map(([v, t, m, d, pr]) => { const on = len === v; return {
+title: t, time: m, desc: d, price: pr, due: pr - 25, pressed: on ? 'true' : 'false', pick: () => set({ len: v }),
+style: 'width: 100%; display: flex; gap: 16px; align-items: flex-start; text-align: left; font: inherit; color: inherit; cursor: pointer; box-sizing: border-box; padding: 22px 22px 22px 20px; border-radius: 20px; ' + (on ? 'background: rgba(4, 193, 226, 0.08); border: 1px solid #04C1E2; box-shadow: 0 0 0 1px #04C1E2 inset;' : 'background: #0A1C2C; border: 1px solid #17304A;'),
+dot: 'flex: none; width: 22px; height: 22px; margin-top: 6px; border-radius: 999px; box-sizing: border-box; transition: background 200ms ease, border-color 200ms ease; ' + (on ? 'border: 2px solid #04C1E2; background: #04C1E2; box-shadow: inset 0 0 0 4px #0A1C2C;' : 'border: 2px solid rgba(246, 251, 255, 0.35); background: transparent;')
+}; });
+const stepDot = (done) => 'flex: none; width: 38px; height: 38px; border-radius: 999px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 16px; transition: background 400ms ease, color 400ms ease; ' + (done ? 'background: #04C1E2; color: #03111E; border: 1px solid #04C1E2; box-shadow: 0 0 0 4px rgba(4,193,226,0.12);' : 'background: transparent; color: #04C1E2; border: 1px solid rgba(4,193,226,.45);');
 const lengthOpts = [['single', T('Single · 30 min')], ['double', T('Double · 60 min')]].map(([v, l]) => ({ label: l, pressed: len === v, style: pill(len === v), pick: () => set({ len: v }) }));
 const patternOpts = [['same', T('Same slot each week')], ['each', T('Pick each week')]].map(([v, l]) => ({ label: l, pressed: pattern === v, style: pill(pattern === v), pick: () => set({ pattern: v, week: 1 }) }));
 
@@ -502,7 +511,7 @@ pfLine: rv(8, 9, 'margin: clamp(40px, 4vw, 56px) auto 0; max-width: 820px; text-
 noticeOn: this.props.showNotice !== false && !S.noticeClosed,
 closeNotice: () => this.setState({ noticeClosed: true }),
 pgsent: Array.from({ length: 300 }, (_, i) => ({ ref: (el) => { this._pgs = this._pgs || []; this._pgs[i] = el; }, style: 'position: absolute; left: 0; width: 1px; height: 1px; top: ' + (i / 3) + '%' })),
-ctaStyle: (() => { const base = 'background: #04C1E2; color: #03111E; text-decoration: none; font-weight: 600; font-size: 16px; padding: 12px 22px; border-radius: 999px; min-height: 44px; box-sizing: border-box; display: inline-flex; align-items: center; z-index: 45; '; const right = 'right: max(24px, calc((100% - 1248px) / 2 + 24px)); box-shadow: 0 10px 30px -8px rgba(0,0,0,0.6), 0 0 0 1px rgba(3,17,30,0.2); animation: ctaIn 400ms cubic-bezier(0.16, 1, 0.3, 1) both;'; if (!S.pinCta) return base; if (S.canvasTop != null) return base + 'position: absolute; top: ' + (S.canvasTop + 16) + 'px; ' + right.replace('max(24px, calc((100% - 1248px) / 2 + 24px))', '24px'); return base + 'position: fixed; top: 16px; ' + right; })(),
+ctaStyle: (() => { const base = 'background: #04C1E2; color: #03111E; text-decoration: none; font-weight: 600; font-size: 16px; padding: 12px 22px; border-radius: 999px; min-height: 44px; box-sizing: border-box; display: inline-flex; align-items: center; z-index: 45; '; const right = 'right: max(24px, calc((100% - 1248px) / 2 + 24px)); box-shadow: 0 10px 30px -8px rgba(0,0,0,0.6), 0 0 0 1px rgba(3,17,30,0.2); animation: ctaIn 400ms cubic-bezier(0.16, 1, 0.3, 1) both;'; if (!S.pinCta) return base; const gone = 'opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(-8px); transition: opacity 250ms ease, transform 250ms ease, visibility 0s linear 250ms; '; if (S.ctaHide) return base + (S.canvasTop != null ? 'position: absolute; top: ' + (S.canvasTop + 16) + 'px; right: 24px; ' : 'position: fixed; top: 16px; right: max(24px, calc((100% - 1248px) / 2 + 24px)); ') + gone; if (S.canvasTop != null) return base + 'position: absolute; top: ' + (S.canvasTop + 16) + 'px; ' + right.replace('max(24px, calc((100% - 1248px) / 2 + 24px))', '24px'); return base + 'position: fixed; top: 16px; ' + right; })(),
 chipExp: S.chipOpen ? 'true' : 'false',
 chipToggle: () => this.setState({ chipOpen: !(this.state && this.state.chipOpen) }),
 chipIcon: 'flex: none; width: 22px; height: 22px; border-radius: 999px; border: 1.5px solid currentColor; box-sizing: border-box; display: flex; align-items: center; justify-content: center; transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1); transform: rotate(' + (S.chipOpen ? 45 : 0) + 'deg);',
@@ -552,7 +561,8 @@ videoWrap: (S.videoBox ? 'position: absolute; left: 0; right: 0; top: ' + S.vide
 closeVideo: () => this._closeVideo(),
 stopClick: (e) => { if (e && e.stopPropagation) e.stopPropagation(); },
 setVideo: (el) => { this.video = el; },
-lengthOpts, patternOpts, weekTabs, headers, rows,
+lengthOpts, workoutOpts, patternOpts, weekTabs, headers, rows,
+stepDot1: stepDot(true), stepDot2: stepDot(complete), stepDot3: stepDot(!!S.confirmed),
 isSame, isEach: !isSame, isDouble,
 title: isDouble ? T('Double') : T('Single'),
 subtitle: isDouble ? T('60 minutes a week, four weeks') : T('30 minutes a week, four weeks'),

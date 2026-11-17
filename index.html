@@ -40,7 +40,7 @@
 <div aria-hidden="true" class="hero-fx"><div class="lt"></div><div class="tr"><span class="st h" style="top: 392px; animation-delay: 1.5s"></span><span class="st h rl" style="top: 672px; animation-delay: 8s; animation-duration: 21s"></span><span class="st h" style="top: 952px; animation-delay: 13s; animation-duration: 19s"></span><span class="st v" style="left: 224px; animation-delay: 4s"></span><span class="st v" style="left: 784px; animation-delay: 10.5s; animation-duration: 23s"></span><span class="st v" style="left: 1288px; animation-delay: 16s; animation-duration: 20s"></span></div></div>
 <div class="hero-pin" style="flex: 1 1 440px; min-width: 0; display: flex; flex-direction: column; gap: var(--s-head)">
 <div style="{{rv0e}}"><p style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: #04C1E2">CHAOS IS INEVITABLE</p></div>
-<div ref="{{rvRef0}}" style="{{rv0h}}"><h1 style="font-family: 'Saira Extra Condensed', sans-serif; font-weight: 800; font-size: clamp(44px, 5vw, 72px); line-height: 0.9; text-transform: uppercase; letter-spacing: 0.01em; text-wrap: balance">Panic is optional<span style="color: rgb(4, 193, 226)">.</span></h1></div>
+<div ref="{{rvRef0}}" style="{{rv0h}}"><h1 style="font-family: 'Saira Extra Condensed', sans-serif; font-weight: 800; font-size: clamp(44px, 5vw, 72px); line-height: 0.9; text-transform: uppercase; letter-spacing: 0.01em; text-wrap: balance">Panic is<br><span style="color: rgb(4, 193, 226)">Optional.</span></h1></div>
 <div style="{{rv0s}}">
 <p style="font-size: 20px; color: #C9D6E2; max-width: 640px; text-wrap: pretty; font-weight: 400">A four-week clinic that trains your body's stress response the way a gym trains muscle.<br></p>
 </div>
@@ -186,26 +186,26 @@
 </div>
 </section>
 
-<section class="tx tx-pop" id="book" style="border-top: 1px solid #17304A; padding: var(--s-section) 24px">
+<section class="tx tx-pop" id="book" style="border-top: 1px solid #17304A; padding: var(--s-section) 24px clamp(72px, 9vw, 120px)">
 <div class="bk" style="max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: var(--s-intro)">
-<div class="bk-top" style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-end">
-<div class="bk-head" style="flex: 2 1 560px; min-width: 0; display: flex; flex-direction: column; gap: var(--s-head)">
+<div class="bk-head" style="max-width: 760px; display: flex; flex-direction: column; gap: var(--s-head)">
 <div style="{{rv4e}}"><p style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: #04C1E2">RESERVE A PLACE</p></div>
 <div ref="{{rvRef4}}" style="{{rv4h}}"><h2 style="font-family: 'Saira Extra Condensed', sans-serif; font-weight: 800; font-size: clamp(36px, min(6vw, 7vh), 72px); line-height: 0.95; text-transform: uppercase; text-wrap: balance; max-width: 900px">Be the First,<br><span style="color: rgb(4, 193, 226)">and meet the others.</span></h2></div>
 <div style="{{rv4s}}">
 <p style="color: #C9D6E2">Same time every week, or pick each week yourself. Reserve with a small deposit; the rest is due on the day of your first session.</p>
 </div>
 </div>
-<div class="bk-chips" style="flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; align-items: stretch; gap: 10px"><div style="box-sizing: border-box; background: rgba(246,251,255,0.08); border: 1px solid rgba(246,251,255,0.10); border-radius: 24px; color: #F6FBFF"><button type="button" aria-expanded="{{chipExp}}" aria-controls="offer-detail" onClick="{{chipToggle}}" style="width: 100%; min-height: 48px; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 14px 10px 20px; background: none; border: 0; color: inherit; font: inherit; font-size: 16px; font-weight: 500; text-align: left; cursor: pointer">[PARTNER GYM] members get [X]% off<span aria-hidden="true" style="{{chipIcon}}"><svg width="10" height="10" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 1v12M1 7h12"></path></svg></span></button><div id="offer-detail" style="{{chipBody}}"><div style="min-height: 0; overflow: hidden"><p style="padding: 0 20px 16px; font-size: 14px; line-height: 1.5; color: #A9BCCD">Enter your member code at checkout and the discount comes off your pilot price. [X] of 30 places left.</p></div></div></div><div style="box-sizing: border-box; background: rgba(246,251,255,0.08); border: 1px solid rgba(246,251,255,0.10); border-radius: 24px; color: #F6FBFF"><button type="button" aria-expanded="{{chip2Exp}}" aria-controls="offer-detail-2" onClick="{{chip2Toggle}}" style="width: 100%; min-height: 48px; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 14px 10px 20px; background: none; border: 0; color: inherit; font: inherit; font-size: 16px; font-weight: 500; text-align: left; cursor: pointer">Got a community code? [X]% off<span aria-hidden="true" style="{{chip2Icon}}"><svg width="10" height="10" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 1v12M1 7h12"></path></svg></span></button><div id="offer-detail-2" style="{{chip2Body}}"><div style="min-height: 0; overflow: hidden"><p style="padding: 0 20px 16px; font-size: 14px; line-height: 1.5; color: #A9BCCD">Enter your community code at checkout. One code per booking: it can't be combined with the member discount.</p></div></div></div></div>
+<div class="bk-steps" style="display: flex; flex-direction: column; gap: clamp(72px, 9vw, 120px)">
+<div class="bk-step" style="display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; align-items: center; gap: 14px"><span aria-hidden="true" style="{{stepDot1}}">1</span><h3 style="font-family: 'Saira Extra Condensed', sans-serif; font-weight: 800; text-transform: uppercase; font-size: clamp(30px, 3.6vw, 44px); line-height: 0.95; color: #F6FBFF">Select a workout</h3></div>
+<div role="radiogroup" aria-label="Session length" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 16px">
+<sc-for list="{{workoutOpts}}" as="w" hint-placeholder-count="2"><button type="button" role="radio" class="wo-card" aria-checked="{{w.pressed}}" onClick="{{w.pick}}" style="{{w.style}}"><span aria-hidden="true" style="{{w.dot}}"></span><span style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 10px"><span style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px"><span style="font-family: 'Saira Extra Condensed', sans-serif; font-weight: 800; text-transform: uppercase; font-size: 36px; line-height: 0.9; color: #F6FBFF">{{w.title}}</span><span style="font-weight: 600; font-size: 26px; color: #F6FBFF; font-variant-numeric: tabular-nums">€{{w.price}}</span></span><span style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: #A9BCCD"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="8" cy="8" r="6.5"></circle><path d="M8 4.5V8l2.5 1.5"></path></svg>{{w.time}} a week · 4 weeks</span><span style="font-size: 16px; line-height: 1.5; color: #C9D6E2">{{w.desc}}</span><span style="font-size: 13px; color: #A9BCCD">€25 today · €{{w.due}} by your first session</span></span></button></sc-for>
 </div>
-<div class="bk-main" style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
-<div class="float bk-grid" style="flex: 2 1 560px; min-width: 0; background: #0A1C2C; border: 1px solid #17304A; border-radius: 20px;  box-sizing: border-box; display: flex; flex-direction: column; gap: 18px; padding: var(--s-card)">
-<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px 20px">
-<p style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: #A9BCCD; width: 72px">Length</p>
-<div role="group" aria-label="Session length" style="display: flex; flex: 0 1 auto; min-width: 0; flex-wrap: wrap; gap: 4px; padding: 4px; border: 1px solid #23415E; border-radius: 24px; background: #03111E">
-<sc-for list="{{lengthOpts}}" as="opt" hint-placeholder-count="2"><button type="button" aria-pressed="{{opt.pressed}}" onClick="{{opt.pick}}" style="{{opt.style}}">{{opt.label}}</button></sc-for>
+<div class="bk-chips" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 16px; align-items: start"><div style="box-sizing: border-box; background: rgba(246,251,255,0.08); border: 1px solid rgba(246,251,255,0.10); border-radius: 24px; color: #F6FBFF"><button type="button" aria-expanded="{{chipExp}}" aria-controls="offer-detail" onClick="{{chipToggle}}" style="width: 100%; min-height: 48px; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 14px 10px 20px; background: none; border: 0; color: inherit; font: inherit; font-size: 16px; font-weight: 500; text-align: left; cursor: pointer">[PARTNER GYM] members get [X]% off<span aria-hidden="true" style="{{chipIcon}}"><svg width="10" height="10" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 1v12M1 7h12"></path></svg></span></button><div id="offer-detail" style="{{chipBody}}"><div style="min-height: 0; overflow: hidden"><p style="padding: 0 20px 16px; font-size: 14px; line-height: 1.5; color: #A9BCCD">Enter your member code at checkout and the discount comes off your pilot price. [X] of 30 places left.</p></div></div></div><div style="box-sizing: border-box; background: rgba(246,251,255,0.08); border: 1px solid rgba(246,251,255,0.10); border-radius: 24px; color: #F6FBFF"><button type="button" aria-expanded="{{chip2Exp}}" aria-controls="offer-detail-2" onClick="{{chip2Toggle}}" style="width: 100%; min-height: 48px; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 14px 10px 20px; background: none; border: 0; color: inherit; font: inherit; font-size: 16px; font-weight: 500; text-align: left; cursor: pointer">Got a community code? [X]% off<span aria-hidden="true" style="{{chip2Icon}}"><svg width="10" height="10" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 1v12M1 7h12"></path></svg></span></button><div id="offer-detail-2" style="{{chip2Body}}"><div style="min-height: 0; overflow: hidden"><p style="padding: 0 20px 16px; font-size: 14px; line-height: 1.5; color: #A9BCCD">Enter your community code at checkout. One code per booking: it can't be combined with the member discount.</p></div></div></div></div>
 </div>
-</div>
+<div class="bk-step" style="display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; align-items: center; gap: 14px"><span aria-hidden="true" style="{{stepDot2}}">2</span><h3 style="font-family: 'Saira Extra Condensed', sans-serif; font-weight: 800; text-transform: uppercase; font-size: clamp(30px, 3.6vw, 44px); line-height: 0.95; color: #F6FBFF">Select a slot</h3></div>
+<div class="float bk-grid" style="min-width: 0; background: #0A1C2C; border: 1px solid #17304A; border-radius: 20px;  box-sizing: border-box; display: flex; flex-direction: column; gap: 18px; padding: var(--s-card)">
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px 20px">
 <p style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: #A9BCCD; width: 72px">Pattern</p>
 <div role="group" aria-label="Booking pattern" style="display: flex; flex: 0 1 auto; min-width: 0; flex-wrap: wrap; gap: 4px; padding: 4px; border: 1px solid #23415E; border-radius: 24px; background: #03111E">
@@ -232,50 +232,17 @@
 </sc-for>
 </div>
 </div>
-<p style="font-size: 13px; color: #A9BCCD">Dashed slots are full. A Double books two slots back to back; "Single only" means the slot next to it is taken. Times shown are Amsterdam time. On a phone, swipe the grid for more days.</p>
+<div class="cap-lines"><p>Dashed slots are full.</p><p>A Double books two slots back to back.</p><p>"Single only": the next slot is taken.</p><p>Times shown are Amsterdam time.</p><p>On a phone, swipe the grid for more days.</p></div>
 </div>
-<aside aria-label="Your booking" class="float bk-sum" style="flex: 1 1 300px; min-width: 0; align-self: flex-start; position: sticky; top: 24px; background: #0A1C2C; border: 1px solid #17304A; border-radius: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px; padding: var(--s-card)">
-<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap">
-<h3 style="font-family: 'Saira Extra Condensed', sans-serif; font-weight: 800; font-size: 44px; line-height: 0.9; text-transform: uppercase">{{title}}</h3>
-</div>
-<div style="display: flex; flex-direction: column; gap: 4px">
-<p style="font-size: 16px; color: #F6FBFF">{{subtitle}}</p>
-<p style="font-size: 14px; color: #A9BCCD">{{detail}}</p>
-</div>
-<div style="border-top: 1px solid #17304A; border-bottom: 1px solid #17304A; padding: 14px 0; display: flex; flex-direction: column; gap: 6px">
-<sc-if value="{{isSame}}" hint-placeholder-val="{{true}}"><p style="font-size: 15px; color: {{slotColor}}">{{slotText}}</p></sc-if>
-<sc-if value="{{isEach}}" hint-placeholder-val="{{false}}">
-<sc-for list="{{picksList}}" as="p" hint-placeholder-count="4"><div style="display: flex; justify-content: space-between; gap: 12px; font-size: 14px"><span style="color: #A9BCCD">{{p.week}}</span><span style="{{p.style}}">{{p.value}}</span></div></sc-for>
-</sc-if>
-</div>
-<div style="display: flex; flex-direction: column; gap: 8px; font-size: 16px">
-<div style="display: flex; justify-content: space-between; gap: 12px"><span style="color: #C9D6E2">Pilot price</span><strong style="font-weight: 600">€{{price}}</strong></div>
-<div style="display: flex; justify-content: space-between; gap: 12px"><span style="color: #C9D6E2">Reserve now</span><strong style="font-weight: 600">€25</strong></div>
-<div style="display: flex; justify-content: space-between; gap: 12px"><span style="color: #C9D6E2">Due by your first session</span><strong style="font-weight: 600">€{{due}}</strong></div>
-</div>
-<sc-if value="{{complete}}" hint-placeholder-val="{{false}}"><a href="#checkout" style="background: #04C1E2; color: #03111E; text-decoration: none; font-weight: 600; font-size: 18px; padding: 16px 24px; border-radius: 999px; min-height: 52px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; text-align: center">Reserve my place for €25</a></sc-if>
-<sc-if value="{{incomplete}}" hint-placeholder-val="{{true}}"><button type="button" disabled="" style="background: transparent; color: #A9BCCD; border: 1px dashed #23415E; font: inherit; font-weight: 600; font-size: 16px; padding: 14px 24px; border-radius: 999px; min-height: 52px; cursor: not-allowed">{{ctaHint}}</button></sc-if>
-<p style="font-size: 13px; color: #A9BCCD">Deposits are refundable up to 7 days before your first session.</p>
-</aside>
-</div>
-<div style="background: #0A1C2C; border: 1px solid #17304A; border-radius: 16px; padding: 24px 28px; display: flex; flex-wrap: wrap; gap: 20px 40px; align-items: center">
-<div style="flex: 1 1 360px; min-width: 0; display: flex; flex-direction: column; gap: 6px">
-<p style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #04C1E2">Go or no-go: 14 December</p>
-<p style="color: #C9D6E2; font-size: 16px">The pilot runs if [N] people book by 14 December. If not, your €25 comes straight back.</p>
-</div>
-<div style="flex: 1 1 260px; min-width: 0; display: flex; flex-direction: column; gap: 8px">
-<div role="img" aria-label="[X] of [N] bookings so far" style="height: 10px; border-radius: 999px; background: #17304A; overflow: hidden"><div style="width: 40%; height: 100%; background: #04C1E2"></div></div>
-<p style="font-size: 14px; color: #A9BCCD"><strong style="color: #F6FBFF">[X] of [N]</strong> booked so far</p>
 </div>
 </div>
 </div>
 </section>
 
-<section class="tx tx-chk" id="checkout" style="border-top: 1px solid #17304A; padding: var(--s-section) 24px">
+<section class="tx tx-chk" id="checkout" style="padding: 0 24px var(--s-section)">
 <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: var(--s-intro)">
 <div style="display: flex; flex-direction: column; gap: var(--s-head); max-width: 760px">
-<div style="{{rv5e}}"><p style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: #04C1E2">Checkout</p></div>
-<div ref="{{rvRef5}}" style="{{rv5h}}"><h2 style="font-family: 'Saira Extra Condensed', sans-serif; font-weight: 800; font-size: clamp(40px, 6vw, 72px); line-height: 0.95; text-transform: uppercase">Confirm your place<span style="font-size: clamp(48px, 7vw, 78px); color: rgb(4, 193, 226)">.</span><br></h2></div>
+<div ref="{{rvRef5}}" style="{{rv5h}}"><div style="display: flex; align-items: center; gap: 14px"><span aria-hidden="true" style="{{stepDot3}}">3</span><h3 style="font-family: 'Saira Extra Condensed', sans-serif; font-weight: 800; text-transform: uppercase; font-size: clamp(30px, 3.6vw, 44px); line-height: 0.95; color: #F6FBFF">Add your details</h3></div></div>
 <div style="{{rv5s}}">
 <p style="color: #C9D6E2">A few details, a quick health check, and a €25 deposit. Fully refundable up to 7 days before your first session.</p>
 </div>
@@ -284,7 +251,7 @@
 <sc-if value="{{showNeedSlot}}" hint-placeholder-val="{{true}}">
 <div style="background: #0A1C2C; border: 1px solid #17304A; border-radius: 20px; padding: var(--s-card); box-sizing: border-box; display: flex; flex-wrap: wrap; gap: 16px 32px; align-items: center; justify-content: space-between">
 <sc-if value="{{clashErr}}"><p role="alert" style="flex: 1 1 100%; color: #F86C73; font-weight: 600">Someone just booked that slot. Nothing was charged. Pick another time and you are back on track.</p></sc-if>
-<p style="color: #C9D6E2; flex: 1 1 280px">You haven't picked your slot yet. Choose a length and a time first, then come back here.</p>
+<p style="color: #C9D6E2; flex: 1 1 280px">You haven't picked your slot yet. Choose a workout and a slot first, then come back here.</p>
 <a href="#book" style="border: 1px solid #04C1E2; color: #04C1E2; text-decoration: none; font-weight: 600; font-size: 16px; padding: 12px 22px; border-radius: 999px; min-height: 44px; box-sizing: border-box; display: inline-flex; align-items: center">Choose your slot</a>
 </div>
 </sc-if>
@@ -346,7 +313,7 @@
 <div style="display: flex; justify-content: space-between; gap: 12px"><span style="color: #C9D6E2">Deposit today</span><strong style="font-weight: 600; color: #04C1E2">€25</strong></div>
 <div style="display: flex; justify-content: space-between; gap: 12px"><span style="color: #C9D6E2">Due by your first session</span><strong style="font-weight: 600">€{{due}}</strong></div>
 </div>
-<a href="#book" style="font-size: 14px">Change slot or length</a>
+<a href="#book" style="font-size: 14px">Change workout or slot</a>
 </aside>
 <div style="background: #0A1C2C; border: 1px solid #17304A; border-radius: 16px; padding: 20px var(--s-card); display: flex; flex-direction: column; gap: 8px"><p style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #A9BCCD">Privacy notice</p><p style="color: #A9BCCD; font-size: 13px; line-height: 1.55">BRAVR Technologies BV (KvK 97265896) processes the details you enter in this form to contact you about the course and to manage your reservation. We do not sell or share your data. Payments are processed by Stripe; we never see your card or bank details. You can ask us to view or delete your data at any time. See the full privacy policy on <a href="https://bravr.io">bravr.io</a>.</p></div>
 </div>
@@ -377,6 +344,16 @@
 </div>
 </div>
 </sc-if>
+<div style="background: #0A1C2C; border: 1px solid #17304A; border-radius: 16px; padding: 24px 28px; display: flex; flex-wrap: wrap; gap: 20px 40px; align-items: center">
+<div style="flex: 1 1 360px; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+<p style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #04C1E2">Go or no-go: 14 December</p>
+<p style="color: #C9D6E2; font-size: 16px">The pilot runs if [N] people book by 14 December. If not, your €25 comes straight back.</p>
+</div>
+<div style="flex: 1 1 260px; min-width: 0; display: flex; flex-direction: column; gap: 8px">
+<div role="img" aria-label="[X] of [N] bookings so far" style="height: 10px; border-radius: 999px; background: #17304A; overflow: hidden"><div style="width: 40%; height: 100%; background: #04C1E2"></div></div>
+<p style="font-size: 14px; color: #A9BCCD"><strong style="color: #F6FBFF">[X] of [N]</strong> booked so far</p>
+</div>
+</div>
 </div>
 </section>
 
