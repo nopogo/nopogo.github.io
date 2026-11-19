@@ -22,7 +22,7 @@ return v;
 }
 
 renderVals() {
-return { ...this.langVals(), ...this.faqVals(4) };
+return { ...this.langVals() };
 }
 }
 function start() { window.DCLite.mount(document.getElementById('page-tpl'), Component, {}, document.getElementById('app'), window.I18N.translateTree); }

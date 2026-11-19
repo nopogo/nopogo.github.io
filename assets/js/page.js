@@ -473,7 +473,7 @@ hgV.hgLeave = () => { this._hgHover = false; if (this.state && this.state.heroPa
 hgV.rvGal = rv(0, 3, 'flex: 1 1 440px; min-width: 0; ');
 const faqOpen = S.faqOpen || {};
 const faqV = {};
-for (let i = 0; i < 6; i++) {
+for (let i = 0; i < 9; i++) {
 const on = !!faqOpen[i];
 faqV['faqExp' + i] = on ? 'true' : 'false';
 faqV['faqToggle' + i] = () => { const cur = (this.state && this.state.faqOpen) || {}; this.setState({ faqOpen: Object.assign({}, cur, { [i]: !cur[i] }) }); };

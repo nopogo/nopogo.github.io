@@ -14,9 +14,10 @@ assets/js/booking.js     sends the booking to the Sheet, then on to Stripe
 assets/js/dc-lite.js     small runtime that draws the template
 assets/js/pages/         behaviour for the other pages (language toggle, FAQ, contact form)
 assets/css/bravr.css     styles and self-hosted fonts
-assets/css/pages.css     extra styles for the other pages
+assets/css/pages/        extra styles for each of the other pages (taken from its design board)
 assets/fonts, img, video
 apps-script/Code.gs      Google Apps Script that writes bookings to the Sheet
+tools/                   port_pages.py rebuilds the other pages from the design boards; tmiss.js lists text with no Dutch line
 ```
 
 ## Setup
