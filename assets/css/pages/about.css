@@ -55,7 +55,7 @@
 .founders .mono{width:88px;height:88px;font-size:34px}
 .founders .fp{width:136px;height:136px;border-radius:999px;object-fit:cover;display:block;border:1px solid #23415E;box-shadow:0 0 0 6px rgba(4,193,226,.06)}
 .team-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 24px;border-top:1px solid #17304A}@media (max-width: 900px){.team-row{grid-template-columns:minmax(0,1fr)}}
-.team-row > div{padding:24px 24px 24px 0;border-bottom:1px solid #17304A;display:flex;align-items:center;gap:16px}
+.team-row > div{padding:24px 24px 24px 0;border-bottom:1px solid #17304A;display:flex;align-items:flex-start;gap:16px}
 .team-row img{flex:none;width:64px;height:64px;border-radius:999px;object-fit:cover;display:block;border:1px solid #23415E}
 .adv-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}@media (max-width: 900px){.adv-cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 16px}}
 .adv-cards > figure{margin:0;display:flex;flex-direction:column;gap:6px}

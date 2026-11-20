@@ -13,7 +13,7 @@ BLOB = {
  'c86d5033c753a0024f7e66dc01363f7e':'assets/img/police-pilot-3.jpg',
  '76ecc58af221557df54ffd32639904b2':'assets/img/welkom-thuis.jpg',
  'eb6d37cb452b94e9061294fc87430b72':'assets/img/founders-box.jpg',
- 'e86efbede713649b8f7d3dfb8357b55b':'assets/img/team-table.jpg',
+ 'be7d6b616740303e1090a6ffc85217b2':'assets/img/microlab-field-test.jpg',
  'b98dc6ad846f2d31dad2186b6032f39f':'assets/img/team/ken-koontz.jpg',
  'b78910282438212b6609e4a0565abc71':'assets/img/team/thijs-doornbos.jpg',
  '854ca9812aa4a096c3e24fdcf414ad39':'assets/img/team/peter-barker.jpg',

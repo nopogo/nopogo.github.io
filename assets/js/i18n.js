@@ -289,6 +289,21 @@
     "@Portrait of Kelli Dunlap": "Portret van Kelli Dunlap",
     "@Portrait of Egi Cuijten-Niks": "Portret van Egi Cuijten-Niks",
 
+    "@A tester wearing a VR headset during a BRAVR field test at an office in Rotterdam": "Een tester met een VR-headset tijdens een BRAVR-veldtest op een kantoor in Rotterdam",
+    "The founders with the first BRAVR box, and a field test at the MicroLab in Rotterdam.": "De oprichters met de eerste BRAVR-box, en een veldtest in het MicroLab in Rotterdam.",
+    "Hi, I'm Thijs. A Dad. A Dev. A Dreamer.": "Hoi, ik ben Thijs. Vader. Developer. Dromer.",
+    "I am a full-stack engineer turned award-winning game and VR developer in commercial and academic markets. I specialise in bioinformatics.": "Ik ben een full-stack engineer die prijswinnend game- en VR-ontwikkelaar werd, voor de commerciële en academische markt. Ik ben gespecialiseerd in bio-informatica.",
+    "I'm a curious designer and a dad of two little rug rats that are my joy. I am also an award-winning creator of applied behavioural-science games in research and mental healthcare for over 15 years.": "Ik ben een nieuwsgierige ontwerper en vader van twee kleine boefjes die mijn grootste plezier zijn. Daarnaast maak ik al meer dan 15 jaar prijswinnende games op basis van gedragswetenschap, voor onderzoek en de geestelijke gezondheidszorg.",
+    "Between flag football, a pair of kids, and a career from startup to scale-up to IPO,": "Tussen flag football, twee kinderen en een carrière van startup via scale-up naar beursgang",
+    "I live to help high-performing teams scale quickly, solve problems, and occasionally score a TD or two.": "help ik goed presterende teams graag snel groeien en problemen oplossen, en scoor ik af en toe een touchdown.",
+
+    "A Master’s student in Brain and Cognition who is obsessed with psychology and occultism. Loves bad puns, mysteries and big questions, and can’t stand wet socks.": "Masterstudent Brain and Cognition, geobsedeerd door psychologie en occultisme. Houdt van flauwe woordgrappen, mysteries en grote vragen, en kan niet tegen natte sokken.",
+    "A sonic artist and an anthropologist who grew up on a diet of punk and spooky FX tapes. Most importantly, the father of a super curious and totally wild boy.": "Geluidskunstenaar en antropoloog, grootgebracht op een dieet van punk en griezelige FX-tapes. Maar bovenal vader van een supernieuwsgierig en totaal wild jongetje.",
+    "Friend. Wanderer. Wizard. Traveller.": "Vriend. Zwerver. Tovenaar. Reiziger.",
+    "I am many different things to many different people, but above all else I strive": "Ik ben veel verschillende dingen voor veel verschillende mensen, maar bovenal streef ik",
+    "for attention": "naar aandacht",
+    "to live every day I have as the goodest boi.": "ernaar elke dag die ik heb te leven als de goodest boi.",
+
     // ---- landing page questions taken over from the About page
     "No. We bring everything you need for a session: headset, heart-rate sensor and software.": "Nee. We nemen alles mee wat je nodig hebt voor een sessie: headset, hartslagsensor en software.",
 
